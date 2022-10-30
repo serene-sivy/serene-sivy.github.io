@@ -1,0 +1,958 @@
+
+<!DOCTYPE html>
+<html lang="en ">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serene || 基于情感种子词的情感倾向分析</title>
+    <meta name="author" content="Serene Sivy">
+    <meta name="description" content=" ">
+    <meta name="keywords" content=" ">
+    <link rel="icon" href="/https://pic2.zhimg.com/v2-ab977c62c1f645c4fc56020c9fb833fc_720w.jpg?source=d16d100b">
+    <link rel="stylesheet" href="/css/antd.min.css">
+    
+    <link rel="stylesheet" href="/css/full-theme.css">
+    
+    <script src="/js/vue.js"></script>
+    <script src="/js/antd.min.js"></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+
+    <div id="loading"
+        style="height: 100vh; width: 100%; position: fixed;display: flex;z-index: 200; justify-content: space-between;">
+        <div id="loadleft" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div id="loadright" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div
+            style="position: fixed; height: 100vh; width: 100%;display: flex;justify-content: center;align-items: center;">
+            <div id="loadcontent"
+                style="width:400px;height:400px;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px#a3ddfb; text-align:center;opacity:1;transition:opacity 0.3s ease-out;">
+                <div>
+                    <h2>LOADING...</h2>
+                    <p>加载过慢请开启缓存(浏览器默认开启)</p>
+                    <div>
+                        <img src="/dancingkitty.gif" alt="loading">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="layout">
+        <transition name="into">
+            <div v-show="show_page" style="display: none;">
+                <div id="menu_show">
+                     
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Serene</span>
+        </a>
+        
+        <a href="/">
+            <span>
+                <a-icon type="home" theme="filled" />
+            </span>
+            <span>home</span>
+        </a>
+        
+        <a href="/archives">
+            <span>
+                <a-icon type="folder" theme="filled" />
+            </span>
+            <span>archives</span>
+        </a>
+        
+        <a href="/categories">
+            <span>
+                <a-icon type="book" theme="filled" />
+            </span>
+            <span>categories</span>
+        </a>
+        
+        <a href="/tags">
+            <span>
+                <a-icon type="tags" theme="filled" />
+            </span>
+            <span>tags</span>
+        </a>
+        
+    </div>
+
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div :class="'title'" @click="menu_show=!menu_show">
+            <span style="margin-right: 10px;">
+                <a-icon type="appstore" theme="filled" />
+            </span>
+            <span>Serene</span>
+        </div>
+        <div class="items" v-show="menu_show">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="home" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">home</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="folder" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">archives</div>
+                </div>
+            </a>
+            
+            <a href="/categories">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="book" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">categories</div>
+                </div>
+            </a>
+            
+            <a href="/tags">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="tags" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        <div class="curtain" v-show="menu_show"></div>
+    </div>
+
+</nav>
+                </div>
+
+                <div id="main">
+                     
+<link rel="stylesheet" href="/css/post-body.css">
+<div class="article">
+    <div>
+        <h1>基于情感种子词的情感倾向分析 </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/10/31
+        </span>
+
+        
+        <span class="category">
+            <a href="/categories/project">
+                <span class="icon">
+                    <a-icon type="book" theme="filled" />
+                </span>
+                project
+            </a>
+        </span>
+        
+
+        
+
+        <span class="tags">
+            <span class="icon">
+                <a-icon type="tags" theme="filled" />
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/project" style=color:#ff7d73>
+                    project
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+
+    <div class="content" v-pre>
+        <h3 id="项目分析："><a href="#项目分析：" class="headerlink" title="项目分析："></a>项目分析：</h3><p>给定数据集为 某外卖平台收集的用户评价，正向评价4000条，负向评价8000条，根据词语级情感倾向性分析的内容，采用选定种子词的方式找出最具有正向&#x2F;负向情感倾向的50个词语。</p>
+<p>本实验通过两种工具完成了两种实现方式。项目前期工作都相同，到情感分析部分可以通过两种方式实现。</p>
+<p>Outline:</p>
+<ul>
+<li>项目分析</li>
+<li>项目实现</li>
+<li>实验结果</li>
+</ul>
+<span id="more"></span>
+
+<p>此处需用到的包(Reference)：</p>
+<ul>
+<li>将 <code>句子</code> 切分成若干 <code>词语</code><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/fxsjy/jieba">https://github.com/fxsjy/jieba</a>   jieba 中文分词工具</li>
+</ul>
+</li>
+<li>文本情感分析工具<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/thunlp/OpenHowNet">https://github.com/thunlp/OpenHowNet</a>  HowNet（大型中文语言知识库）OpenHowNet-基于词典的词语情感分析工具</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/isnowfy/snownlp">https://github.com/isnowfy/snownlp</a>  Snownlp - 中文处理工具</li>
+</ul>
+</li>
+</ul>
+<h3 id="项目实现"><a href="#项目实现" class="headerlink" title="项目实现"></a>项目实现</h3><h4 id="Step1-处理数据集"><a href="#Step1-处理数据集" class="headerlink" title="Step1 处理数据集"></a>Step1 处理数据集</h4><p>数据集为csv文件，长这样:</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/xoiP2j"><img src="https://s1.ax1x.com/2022/10/30/xoiP2j.png" alt="xoiP2j.png"></a></p>
+<p>当我们用csv.reader读取每一行时，每一行的第一个元素0、1代表target，数据从第三个元素开始。</p>
+<p>此处用target对读取数据进行分类，同时为了后续处理方便，将每一行的列表转化为字符串类型再分别读入pos_comments和neg_comments两个列表中</p>
+<p>数据处理部分代码如下：</p>
+<pre><code class="python">def read_file(filename, pos_comments, neg_comments):
+    with open(filename, encoding=&#39;UTF-8&#39;) as f:
+        reader = csv.reader(f)
+        for row in reader:
+            target = row[0]   
+            # row 此时是 列表 [&#39;俩小时。,我醉啦！&#39;],[&#39;咸死我啦……&#39;]
+            row = &#39;&#39;.join(row)  
+            # 转换成了string  &#39;送餐很快，味道一般&#39;, &#39;包装超级好、味道也不错&#39;
+            if(target == &#39;1&#39;):
+                pos_comments.append(row[1:])
+            elif(target == &#39;0&#39;):
+                neg_comments.append(row[1:])
+</code></pre>
+<h4 id="Step2-分词"><a href="#Step2-分词" class="headerlink" title="Step2 分词"></a>Step2 分词</h4><p>此处实现分词的核心工具是使用jieba，查阅官方文档得，可得到分词的具体使用方式，此处使用jieba.cut()</p>
+<blockquote>
+<ul>
+<li><code>jieba.cut</code> 方法接受四个输入参数: 需要分词的字符串；cut_all 参数用来控制是否采用全模式；HMM 参数用来控制是否使用 HMM 模型；use_paddle 参数用来控制是否使用paddle模式下的分词模式，paddle模式采用延迟加载方式，通过enable_paddle接口安装paddlepaddle-tiny，并且import相关代码；</li>
+<li><code>jieba.cut_for_search</code> 方法接受两个参数：需要分词的字符串；是否使用 HMM 模型。该方法适合用于搜索引擎构建倒排索引的分词，粒度比较细</li>
+<li><code>jieba.cut</code> 以及 <code>jieba.cut_for_search</code> 返回的结构都是一个可迭代的 generator，可以使用 for 循环来获得分词后得到的每一个词语(unicode)，或者用</li>
+<li><code>jieba.lcut</code> 以及 <code>jieba.lcut_for_search</code> 直接返回 list</li>
+<li><code>jieba.Tokenizer(dictionary=DEFAULT_DICT)</code> 新建自定义分词器，可用于同时使用不同词典。<code>jieba.dt</code> 为默认分词器，所有全局分词相关函数都是该分词器的映射。</li>
+</ul>
+</blockquote>
+<p>将正向评论的分词加入到pos_words中，负向加入到neg_words中，为了方便查看并选取种子词，将其分别写入.csv文件。</p>
+<p>但发现效果并不好，出现大量标点符号和重复词语。</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/xoiyeP"><img src="https://s1.ax1x.com/2022/10/30/xoiyeP.jpg" alt="xoiyeP.jpg"></a></p>
+<p>故使用purify对words进行处理。分别是 删除经常出现的标点、删除单音节词（单音节词会对后面情感分析造成影响）、去重（此处只分析情感倾向，与出现频率没有关系，所以要去重）。</p>
+<p>删除常用的标点需要用<code>while</code>循环进行删除，remove只是发现并删除一个。</p>
+<p>purify之后的分词就纯多了：</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/xoiYdK"><img src="https://s1.ax1x.com/2022/10/30/xoiYdK.png" alt="xoiYdK.png"></a></p>
+<p>代码如下：</p>
+<pre><code class="python">def delete_single_words(words):  # 删除单音节词
+    i = 0
+    while i &lt; len(words):
+        if len(words[i]) == 1:
+            words.pop(i)
+        else:
+            i += 1
+
+
+def purify(words):       # 删除标点、去除单音节词和去重
+    punc = [&quot;，&quot;, &quot;。&quot;, &quot;！&quot;, &quot;~&quot;, &quot;～&quot;, &quot;!&quot;, &quot;&#39;&quot;, &quot;.&quot;, &quot;？&quot;, &quot;、&quot;, &quot;…&quot;]  # 删除被当做词的标点
+    for item in punc:
+        while item in words:
+            words.remove(item)
+    delete_single_words(words)  # 删除单音节词
+    words = list(set(words))  # 去重
+    return words
+
+
+def cut_words(pos_comments, neg_comments, pos_words, neg_words):
+    # jieba.enable_paddle()
+    for comment in pos_comments:
+        pos_words += jieba.cut(comment)     # 此处可选 精确模式 or 全模式
+    for comment in neg_comments:
+        neg_words += jieba.cut(comment) 
+
+    # pos_words  [&#39;很快&#39;, &#39;，&#39;, &#39;好吃&#39;, &#39;，&#39;]            都是列表
+    # neg_words  [&#39;菜品&#39;, &#39;质量&#39;, &#39;好&#39;, &#39;，&#39;, &#39;味道&#39;]
+
+    pos_words = purify(pos_words)
+    neg_words = purify(neg_words)
+
+    # 以下这些再就不需要再运行了 已经写好了.csv
+    with open(&quot;positive_words.csv&quot;, &#39;w&#39;, encoding=&quot;UTF-8&quot;, newline=&#39;&#39;) as f1:
+        writer = csv.writer(f1)
+        writer.writerow(pos_words)
+    with open(&quot;negetive_words.csv&quot;, &#39;w&#39;, encoding=&quot;UTF-8&quot;, newline=&#39;&#39;) as f2:
+        writer = csv.writer(f2)
+        writer.writerow(neg_words)
+</code></pre>
+<h4 id="Step3-选取种子词"><a href="#Step3-选取种子词" class="headerlink" title="Step3 选取种子词"></a>Step3 选取种子词</h4><p>此处比较具有主观能动性，种子词的选取要正负情感倾向比较强，比较典型的词语</p>
+<p>此处选取种子词为</p>
+<pre><code class="python">pos_seedset = ([&#39;好吃&#39;, &#39;满意&#39;, &#39;可口&#39;, &#39;美味&#39;, &#39;满足&#39;, &#39;足够&#39;, &#39;香甜&#39;, &#39;爱上&#39;])
+neg_seedset = ([&#39;失误&#39;, &#39;差劲&#39;, &#39;失望&#39;, &#39;错误&#39;, &#39;肮脏&#39;, &#39;气人&#39;, &#39;不满&#39;, &#39;慢&#39;])
+</code></pre>
+<h4 id="Step4-情感分析"><a href="#Step4-情感分析" class="headerlink" title="Step4 情感分析"></a>Step4 情感分析</h4><p>情感分析部分可以采用两种实现方式，分别是使用HowNet的api接口，以及中文的语言处理工具snownlp，后者的情感分析也是通过基于词典的方式实现的。</p>
+<h5 id="HowNet实现"><a href="#HowNet实现" class="headerlink" title="HowNet实现"></a>HowNet实现</h5><p>此处使用清华大学的一个开源库，OpenHowNet</p>
+<p>使用此库需先</p>
+<pre><code>pip install OpenHowNet
+</code></pre>
+<p>之后在代码前面先引用</p>
+<pre><code class="python">import OpenHowNet
+</code></pre>
+<p>此处用到的函数为 <code>calculate_word_similarity(self, word0, word1)</code> ，作用是计算两个词的相似度。</p>
+<p>数值越大则说明两个词越相似， 如“好吃”和“美味”的输出就是1，”苹果“和”梨“的输出也是1，而”好吃“和”还行“的输出则是-1.</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/xoPduq"><img src="https://s1.ax1x.com/2022/10/30/xoPduq.png" alt="xoPduq.png"></a></p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/xoP2vR"><img src="https://s1.ax1x.com/2022/10/30/xoP2vR.png" alt="xoP2vR.png"></a></p>
+<p>分析之前，先建立词典并初始化hownet：</p>
+<pre><code>hownet_dict = OpenHowNet.HowNetDict()
+hownet_dict.initialize_sememe_similarity_calculation()
+zh_dict = hownet_dict.get_zh_words()
+</code></pre>
+<p>之后用到的情感倾向分析的方法是 用 <code>num_polar</code> 量化情感倾向，将每一个词分别与正向种子词、负向种子词通过上述函数计算相似度，并将与正向种子词的相似度加上，将负向种子词的相似度减去，以得到的 <code>num_polar</code> 为情感倾向指数进行排序，数值越大则越正向，数值越小越负向。</p>
+<p>用HowNet做情感分析代码如下：</p>
+<pre><code class="python">def emo_analyse(words, pos_seedsets, neg_seedsets):
+    # OpenHowNet.download()   # 第一次运行需下载HowNet的core data
+    hownet_dict = OpenHowNet.HowNetDict(init_sim=True)
+    hownet_dict.initialize_sememe_similarity_calculation()
+    for i in range(len(words)):
+        # 打印进度条
+        sys.stdout.write(&#39;\r&#39;)
+        sys.stdout.write(
+            &quot;%s%% |%s&quot; % (int((i + 1) * 100 / len(words)), int((i + 1) * 100 / len(words)) * &#39;#&#39;))
+        sys.stdout.flush()
+        # time.sleep(0.001)
+
+        word = words[i]
+        num_polar = 0
+        if word not in zh_dict:
+            words[i] = (word, num_polar)
+            continue
+        for p in pos_seedset:
+            num_polar += hownet_dict.calculate_word_similarity(word, p)
+        for q in neg_seedset:
+            num_polar -= hownet_dict.calculate_word_similarity(word, q)
+        words[i] = (word, num_polar)
+</code></pre>
+<h5 id="snownlp实现"><a href="#snownlp实现" class="headerlink" title="snownlp实现"></a>snownlp实现</h5><p>此处用到自然语言处理工具snownlp，优点是功能较多且轻便好用。</p>
+<p>使用前先</p>
+<pre><code class="python">from snownlp import SnowNLP as snlp
+</code></pre>
+<p>其功能较多，此处用到其中两个，分别是：</p>
+<ul>
+<li><p>情感分析      <code>.sentiments</code></p>
+<p>SnowNLP的情感分析是基于自带的两个积极跟消极的语料文件来进行分析的（neg.txt、pos.txt）。这两个语料文件是某平台的评论留言，主要有关于书本的、酒店的、电脑及配件的几个方向的评价留言。情感分析的结果是一个小数，越接近1，说明越偏向积极；越接近0，说明越偏向消极。</p>
+<p>e.g.</p>
+<pre><code class="terminal">&gt;&gt;&gt; text1 = &#39;这是我遇见的最棒的一家店，种类多，价格低，更喜欢的是服务质量很好&#39;
+&gt;&gt;&gt; print(s1.sentiments)
+0.99509716108733
+</code></pre>
+</li>
+<li><p>相似度分析  <code>.sim</code></p>
+<p>为0-1的数，越大则说明越相似，越小则越不相似。</p>
+<p>e.g.</p>
+<pre><code class="terminal">&gt;&gt;&gt; s = SnowNLP([&#39;深度学习&#39;, &#39;自然语言处理&#39;])
+&gt;&gt;&gt; artilc1 = [&#39;自然语言处理&#39;]
+&gt;&gt;&gt; print(s.sim(artilc1))
+[0.4686473612532025]
+</code></pre>
+</li>
+</ul>
+<p>发现这两个函数都与情感倾向分析有关，所以可以用不同的运算关系表征最后的情感倾向。这里将而且根据一定权重相加，即</p>
+<p><code>num_polar = 情感分析得到输出 / 2 + 相似度</code></p>
+<p>而对相似度的分析，与上面HowNet的处理方式同。</p>
+<p>运用snownlp进行情感分析的代码如图（与上面相比多了情感得分一项，大致思路同）：</p>
+<pre><code class="python">def emo_analyse(words, pos_seedset, neg_seedset):
+    # OpenHowNet.download()   # 第一次运行需下载HowNet的core data
+    
+    for i in range(len(words)):
+        # 打印进度条
+        sys.stdout.write(&#39;\r&#39;)
+        sys.stdout.write(
+            &quot;%s%% |%s&quot; % (int((i + 1) * 100 / len(words)), int((i + 1) * 100 / len(words)) * &#39;#&#39;))
+        sys.stdout.flush()
+        time.sleep(0.001)
+
+        word = words[i]
+        num_polar = 0
+        emo_trend = snlp(words[i]).sentiments   # 正/负项情感得分
+        sim = pos_seedset.sim(word)             # 相似度
+        sum = 0
+        for j in range(len(sim)):
+            sum += sim[j]
+            
+        sim = neg_seedset.sim(word)
+        for j in range(len(sim)):
+            sum -= sim[j]
+
+        num_polar = sum + emo_trend / 3
+        words[i] = (word, num_polar)     # 改变words元素的性质
+</code></pre>
+<h4 id="Step5-结果处理"><a href="#Step5-结果处理" class="headerlink" title="Step5 结果处理"></a>Step5 结果处理</h4><p>由上面的分析过程，words已经改变为二元元组，所以对其第二项进行排序，需用到<code>lambda</code> ，之后将结果保存到xlsx文件中。</p>
+<pre><code class="python">pos_words.sort(key=lambda x: int(x[1]), reverse=True)     # 使用降序排列
+neg_words.sort(key=lambda x: int(x[1]), reverse=False)      # 升序排序
+print(&quot;&quot;)
+print(&quot;most positive:&quot;)
+print(pos_words[:50])
+
+print(&quot;\nmost negtive:&quot;)
+print(neg_words[:50])
+
+# 以表格的形式保存答案
+pos = pandas.DataFrame(pos_words)
+neg = pandas.DataFrame(neg_words)
+pos.to_excel(&quot;most_positive_words.xlsx&quot;)
+neg.to_excel(&quot;most_negative_words.xlsx&quot;)
+</code></pre>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p><a target="_blank" rel="noopener" href="https://imgse.com/i/xoiwzd"><img src="https://s1.ax1x.com/2022/10/30/xoiwzd.png" alt="xoiwzd.png"></a></p>
+<p>使用sort()函数进行排序后发现仍有无法，猜测可能是因为Python排序精度的问题？</p>
+<p>最终得到结果：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>most positive</th>
+<th>num_polar</th>
+<th></th>
+<th></th>
+<th>most negative</th>
+<th>num_polar</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>足味美</td>
+<td>5.378925989</td>
+<td></td>
+<td>0</td>
+<td>操作失误</td>
+<td>-3.581665468</td>
+</tr>
+<tr>
+<td>1</td>
+<td>甜香</td>
+<td>3.501401375</td>
+<td></td>
+<td>1</td>
+<td>错误行为</td>
+<td>-3.275580767</td>
+</tr>
+<tr>
+<td>2</td>
+<td>味好</td>
+<td>3.338570048</td>
+<td></td>
+<td>2</td>
+<td>不冷不热</td>
+<td>-3.107670965</td>
+</tr>
+<tr>
+<td>3</td>
+<td>愉快</td>
+<td>3.396653603</td>
+<td></td>
+<td>3</td>
+<td>脏脏</td>
+<td>-3.121019649</td>
+</tr>
+<tr>
+<td>4</td>
+<td>足够</td>
+<td>3.817127469</td>
+<td></td>
+<td>4</td>
+<td>差差</td>
+<td>-3.117290515</td>
+</tr>
+<tr>
+<td>5</td>
+<td>色香味</td>
+<td>3.476084312</td>
+<td></td>
+<td>5</td>
+<td>不慢</td>
+<td>-3.525069445</td>
+</tr>
+<tr>
+<td>6</td>
+<td>足足</td>
+<td>3.899426732</td>
+<td></td>
+<td>6</td>
+<td>差劲</td>
+<td>-3.08881853</td>
+</tr>
+<tr>
+<td>7</td>
+<td>好吃懒做</td>
+<td>3.390476086</td>
+<td></td>
+<td>7</td>
+<td>慢慢</td>
+<td>-3.797837907</td>
+</tr>
+<tr>
+<td>8</td>
+<td>甜味</td>
+<td>3.468875825</td>
+<td></td>
+<td>8</td>
+<td>失望透顶</td>
+<td>-3.363642373</td>
+</tr>
+<tr>
+<td>9</td>
+<td>够快</td>
+<td>3.497532029</td>
+<td></td>
+<td>9</td>
+<td>错误</td>
+<td>-3.275580767</td>
+</tr>
+<tr>
+<td>10</td>
+<td>好快</td>
+<td>3.441098047</td>
+<td></td>
+<td>10</td>
+<td>失望</td>
+<td>-3.366605495</td>
+</tr>
+<tr>
+<td>11</td>
+<td>香甜</td>
+<td>3.496653603</td>
+<td></td>
+<td>11</td>
+<td>差超差</td>
+<td>-3.116195824</td>
+</tr>
+<tr>
+<td>12</td>
+<td>好好</td>
+<td>3.408334514</td>
+<td></td>
+<td>12</td>
+<td>差差评</td>
+<td>-3.1215863</td>
+</tr>
+<tr>
+<td>13</td>
+<td>香味</td>
+<td>3.52443138</td>
+<td></td>
+<td>13</td>
+<td>脏乱差</td>
+<td>-3.109249144</td>
+</tr>
+<tr>
+<td>14</td>
+<td>够吃</td>
+<td>3.447173438</td>
+<td></td>
+<td>14</td>
+<td>不咸不淡</td>
+<td>-3.102573899</td>
+</tr>
+<tr>
+<td>15</td>
+<td>够味</td>
+<td>3.35122493</td>
+<td></td>
+<td>15</td>
+<td>不太差</td>
+<td>-3.112092507</td>
+</tr>
+<tr>
+<td>16</td>
+<td>又快又好</td>
+<td>3.489741227</td>
+<td></td>
+<td>16</td>
+<td>气死人</td>
+<td>-3.027992627</td>
+</tr>
+<tr>
+<td>17</td>
+<td>没吃够</td>
+<td>3.32895868</td>
+<td></td>
+<td>17</td>
+<td>时间误差</td>
+<td>-3.246666497</td>
+</tr>
+<tr>
+<td>18</td>
+<td>美味</td>
+<td>3.370390976</td>
+<td></td>
+<td>18</td>
+<td>不差</td>
+<td>-3.098665578</td>
+</tr>
+<tr>
+<td>19</td>
+<td>吃够</td>
+<td>3.385542492</td>
+<td></td>
+<td>19</td>
+<td>失误</td>
+<td>-3.553861313</td>
+</tr>
+<tr>
+<td>20</td>
+<td>好香</td>
+<td>3.472450796</td>
+<td></td>
+<td>20</td>
+<td>冒冒失失</td>
+<td>-3.558067995</td>
+</tr>
+<tr>
+<td>21</td>
+<td>美好</td>
+<td>3.463908937</td>
+<td></td>
+<td>21</td>
+<td>大失所望</td>
+<td>-3.410515702</td>
+</tr>
+<tr>
+<td>22</td>
+<td>快快</td>
+<td>3.496653603</td>
+<td></td>
+<td>22</td>
+<td>慢不说</td>
+<td>-3.552198039</td>
+</tr>
+<tr>
+<td>23</td>
+<td>甜甜的</td>
+<td>3.521915299</td>
+<td></td>
+<td>23</td>
+<td>人比人</td>
+<td>-2.920726598</td>
+</tr>
+<tr>
+<td>24</td>
+<td>吃香</td>
+<td>3.385542492</td>
+<td></td>
+<td>24</td>
+<td>不能不要</td>
+<td>-2.936716363</td>
+</tr>
+<tr>
+<td>25</td>
+<td>美味可口</td>
+<td>3.452543948</td>
+<td></td>
+<td>25</td>
+<td>不得不</td>
+<td>-2.946827586</td>
+</tr>
+<tr>
+<td>26</td>
+<td>香香</td>
+<td>3.470731099</td>
+<td></td>
+<td>26</td>
+<td>得饶人处且饶人</td>
+<td>-2.975896007</td>
+</tr>
+<tr>
+<td>27</td>
+<td>美美</td>
+<td>3.542352986</td>
+<td></td>
+<td>27</td>
+<td>不错</td>
+<td>-2.838051082</td>
+</tr>
+<tr>
+<td>28</td>
+<td>竟爱上</td>
+<td>3.362681202</td>
+<td></td>
+<td>28</td>
+<td>真不错</td>
+<td>-2.837371509</td>
+</tr>
+<tr>
+<td>29</td>
+<td>够味儿</td>
+<td>3.504927928</td>
+<td></td>
+<td>29</td>
+<td>差不多</td>
+<td>-2.95637216</td>
+</tr>
+<tr>
+<td>30</td>
+<td>美味佳肴</td>
+<td>3.361760148</td>
+<td></td>
+<td>30</td>
+<td>气人</td>
+<td>-2.930498108</td>
+</tr>
+<tr>
+<td>31</td>
+<td>挺好吃</td>
+<td>3.493575857</td>
+<td></td>
+<td>31</td>
+<td>挺不错</td>
+<td>-2.811723878</td>
+</tr>
+<tr>
+<td>32</td>
+<td>好吃</td>
+<td>3.409932735</td>
+<td></td>
+<td>32</td>
+<td>还慢</td>
+<td>-2.000226143</td>
+</tr>
+<tr>
+<td>33</td>
+<td>味美</td>
+<td>3.432086696</td>
+<td></td>
+<td>33</td>
+<td>人气</td>
+<td>-2.930498108</td>
+</tr>
+<tr>
+<td>34</td>
+<td>味道鲜美</td>
+<td>3.353617578</td>
+<td></td>
+<td>34</td>
+<td>摇不动</td>
+<td>-1.550233793</td>
+</tr>
+<tr>
+<td>35</td>
+<td>味十足</td>
+<td>3.707202689</td>
+<td></td>
+<td>35</td>
+<td>不至于</td>
+<td>-1.353258754</td>
+</tr>
+<tr>
+<td>36</td>
+<td>挺足</td>
+<td>2.077689557</td>
+<td></td>
+<td>36</td>
+<td>理直气壮</td>
+<td>-1.479227747</td>
+</tr>
+<tr>
+<td>37</td>
+<td>美中不足</td>
+<td>2.268463034</td>
+<td></td>
+<td>37</td>
+<td>不同</td>
+<td>-1.387150153</td>
+</tr>
+<tr>
+<td>38</td>
+<td>真足</td>
+<td>2.077689557</td>
+<td></td>
+<td>38</td>
+<td>要不然</td>
+<td>-1.387150153</td>
+</tr>
+<tr>
+<td>39</td>
+<td>十足</td>
+<td>2.181856223</td>
+<td></td>
+<td>39</td>
+<td>不减</td>
+<td>-1.415338174</td>
+</tr>
+<tr>
+<td>40</td>
+<td>很足</td>
+<td>2.22474838</td>
+<td></td>
+<td>40</td>
+<td>团慢</td>
+<td>-1.870596514</td>
+</tr>
+<tr>
+<td>41</td>
+<td>充足</td>
+<td>2.151763631</td>
+<td></td>
+<td>41</td>
+<td>差多</td>
+<td>-1.515725348</td>
+</tr>
+<tr>
+<td>42</td>
+<td>料足</td>
+<td>2.151473128</td>
+<td></td>
+<td>42</td>
+<td>不该</td>
+<td>-1.439430716</td>
+</tr>
+<tr>
+<td>43</td>
+<td>足哈</td>
+<td>2.127334947</td>
+<td></td>
+<td>43</td>
+<td>错路</td>
+<td>-1.354227747</td>
+</tr>
+<tr>
+<td>44</td>
+<td>超足</td>
+<td>2.077689557</td>
+<td></td>
+<td>44</td>
+<td>更差</td>
+<td>-1.497086415</td>
+</tr>
+<tr>
+<td>45</td>
+<td>知足</td>
+<td>2.188800668</td>
+<td></td>
+<td>45</td>
+<td>失联</td>
+<td>-1.606089954</td>
+</tr>
+<tr>
+<td>46</td>
+<td>满足</td>
+<td>2.434895627</td>
+<td></td>
+<td>46</td>
+<td>发脾气</td>
+<td>-1.490299877</td>
+</tr>
+<tr>
+<td>47</td>
+<td>量足</td>
+<td>2.099073077</td>
+<td></td>
+<td>47</td>
+<td>不像样</td>
+<td>-1.395894413</td>
+</tr>
+<tr>
+<td>48</td>
+<td>足量</td>
+<td>2.099073077</td>
+<td></td>
+<td>48</td>
+<td>家人</td>
+<td>-1.347176465</td>
+</tr>
+<tr>
+<td>49</td>
+<td>满意</td>
+<td>2.193015384</td>
+<td></td>
+<td>49</td>
+<td>可气</td>
+<td>-1.529227747</td>
+</tr>
+</tbody></table>
+<p>对表格中的各关键词进行可视化后，得到如下结果：</p>
+<p>正向：</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/xoP3E8"><img src="https://s1.ax1x.com/2022/10/30/xoP3E8.png" alt="xoP3E8.png"></a></p>
+<p>负向：</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/xoPngA"><img src="https://s1.ax1x.com/2022/10/30/xoPngA.png" alt="xoPngA.png"></a></p>
+
+    </div>
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <div id="comment">
+        <div id="gitalk-container">
+        </div>
+    </div>
+    
+</div>
+                     
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 2022 - 2022 Serene
+            <span class="footer-icon">
+                <a-icon type="flag" theme="filled" /></span>
+            @Serene Sivy
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/korilin/hexo-theme-particle">Particle Theme</a></div>
+        
+    </div>
+
+</footer>
+
+<script src="/js/highlight.min.js"></script>
+<script src="/js/particle.js"></script>
+                </div>
+            </div>
+        </transition>
+    </div>
+
+    <script>
+    new Vue({
+        el: "#layout",
+        data: {
+            show_page: false,
+            onload_menu: false,
+            menu_show: false,
+            card_top: 100
+        },
+        created: function () {
+            var that = this
+            window.onload = function () {
+                that.show_page = true
+                document.getElementById("loadcontent").style.opacity = 0
+                setTimeout(function () {
+                    document.getElementById("loadleft").style.width = 0
+                    document.getElementById("loadright").style.width = 0
+                }, 300)
+                setTimeout(function () {
+                    document.getElementById("loading").style = "display:none"
+                }, 600)
+            }
+        },
+        mounted: function () {
+            var that = this
+            window.addEventListener('scroll', function (e) {
+                that.menu_show = false
+            })
+        },
+        methods: {
+            home_click: function () {
+                window.scrollTo({
+                    top: window.innerHeight - 80,
+                    behavior: "smooth",
+                });
+            }
+        }
+    })
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: 'serene-sivy',
+        clientSecret: '2594164433cjs',
+        repo: 'comments',      // The repository of store comments,
+        owner: 'serene-sivy',
+        admin: ['serene-sivy'],
+        language: 'en',
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: true  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+</body>
+
+</html>

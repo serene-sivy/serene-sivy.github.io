@@ -1,0 +1,683 @@
+
+<!DOCTYPE html>
+<html lang="en ">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serene || Welcome to Serene World</title>
+    <meta name="author" content="Serene Sivy">
+    <meta name="description" content=" ">
+    <meta name="keywords" content=" ">
+    <link rel="icon" href="/https://pic2.zhimg.com/v2-ab977c62c1f645c4fc56020c9fb833fc_720w.jpg?source=d16d100b">
+    <link rel="stylesheet" href="/css/antd.min.css">
+    
+    <link rel="stylesheet" href="/css/full-theme.css">
+    
+    <script src="/js/vue.js"></script>
+    <script src="/js/antd.min.js"></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+
+    <div id="loading"
+        style="height: 100vh; width: 100%; position: fixed;display: flex;z-index: 200; justify-content: space-between;">
+        <div id="loadleft" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div id="loadright" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div
+            style="position: fixed; height: 100vh; width: 100%;display: flex;justify-content: center;align-items: center;">
+            <div id="loadcontent"
+                style="width:400px;height:400px;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px#a3ddfb; text-align:center;opacity:1;transition:opacity 0.3s ease-out;">
+                <div>
+                    <h2>LOADING...</h2>
+                    <p>加载过慢请开启缓存(浏览器默认开启)</p>
+                    <div>
+                        <img src="/dancingkitty.gif" alt="loading">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="layout">
+        <transition name="into">
+            <div v-show="show_page" style="display: none;">
+                <div id="menu_show">
+                     
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Serene</span>
+        </a>
+        
+        <a href="/">
+            <span>
+                <a-icon type="home" theme="filled" />
+            </span>
+            <span>home</span>
+        </a>
+        
+        <a href="/archives">
+            <span>
+                <a-icon type="folder" theme="filled" />
+            </span>
+            <span>archives</span>
+        </a>
+        
+        <a href="/categories">
+            <span>
+                <a-icon type="book" theme="filled" />
+            </span>
+            <span>categories</span>
+        </a>
+        
+        <a href="/tags">
+            <span>
+                <a-icon type="tags" theme="filled" />
+            </span>
+            <span>tags</span>
+        </a>
+        
+    </div>
+
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div :class="'title'" @click="menu_show=!menu_show">
+            <span style="margin-right: 10px;">
+                <a-icon type="appstore" theme="filled" />
+            </span>
+            <span>Serene</span>
+        </div>
+        <div class="items" v-show="menu_show">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="home" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">home</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="folder" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">archives</div>
+                </div>
+            </a>
+            
+            <a href="/categories">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="book" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">categories</div>
+                </div>
+            </a>
+            
+            <a href="/tags">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="tags" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        <div class="curtain" v-show="menu_show"></div>
+    </div>
+
+</nav>
+                </div>
+
+                <div id="main">
+                    <div id="home-head" style=background-image:url('home.jpg')>
+    <script>
+        var menu = document.getElementById("menu")
+        menu.className += " menu-color"
+    </script>
+     
+    <div id="home-info" class="home-info" @click="home_click">
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="info">
+            <div class="wrap">
+                <h1>Serene</h1>
+                <h3>Welcome to Serene World</h3>
+                <h5></h5>
+            </div>
+        </span>
+    </div>
+     
+</div>
+
+
+
+<div id="home-posts-wrap" class=>
+    <div id="home-posts">
+
+        <div id="posts">
+            
+
+<div class="post">
+
+    <a href="/2022/10/31/社会计算情感分析/">
+        <h2>
+            基于情感种子词的情感倾向分析
+        </h2>
+    </a>
+
+    <div class="category-and-date">
+
+        
+        <span class="category">
+            <a href="/categories/project">
+                <span class="icon">
+                    <a-icon type="book" theme="filled" /></span>
+                project
+            </a>
+        </span>
+        
+
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/10/31
+        </span>
+
+    </div>
+
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            <h3 id="项目分析："><a href="#项目分析：" class="headerlink" title="项目分析："></a>项目分析：</h3><p>给定数据集为 某外卖平台收集的用户评价，正向评价4000条，负向评价8000条，根据词语级情感倾向性分析的内容，采用选定种子词的方式找出最具有正向&#x2F;负向情感倾向的50个词语。</p>
+<p>本实验通过两种工具完成了两种实现方式。项目前期工作都相同，到情感分析部分可以通过两种方式实现。</p>
+<p>Outline:</p>
+<ul>
+<li>项目分析</li>
+<li>项目实现</li>
+<li>实验结果</li>
+</ul>
+            
+            
+        </div>
+    </div>
+
+    <div class="post-tags">
+        
+        <span class="icon">
+            <a-icon type="tags" theme="filled" />
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/project" style=color:#00a596>
+                project
+            </a>
+        </span>
+        
+    </div>
+
+    <a href="/2022/10/31/社会计算情感分析/ " class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+
+    <a href="/2022/09/27/后门攻击概述/">
+        <h2>
+            学习笔记 | 深度学习系统的后门攻击概述
+        </h2>
+    </a>
+
+    <div class="category-and-date">
+
+        
+        <span class="category">
+            <a href="/categories/Research">
+                <span class="icon">
+                    <a-icon type="book" theme="filled" /></span>
+                Research
+            </a>
+        </span>
+        
+
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/9/27
+        </span>
+
+    </div>
+
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            <h3 id="后门攻击"><a href="#后门攻击" class="headerlink" title="后门攻击"></a>后门攻击</h3><p>主要介绍下人工智能安全近年来十分重要的一个领域，后门攻击领域。以一个刚刚进入此领域的视角介绍人工智能领域后门攻击的攻击方法、攻击模式、相关术语、相关衡量指标以及近年来的发展情况，同时引申出应对不同后门攻击手段而产生的不同的防御模式。</p>
+<p><img src="https://s1.ax1x.com/2022/09/27/xeSbiF.png" alt="xeSbiF.png"></p>
+<h2 id="outline"><a href="#outline" class="headerlink" title="outline"></a>outline</h2><ul>
+<li>深度学习系统的后门攻击概述</li>
+<li>针对后门攻击的防御</li>
+</ul>
+            
+            
+        </div>
+    </div>
+
+    <div class="post-tags">
+        
+        <span class="icon">
+            <a-icon type="tags" theme="filled" />
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/AI" style=color:#03a9f4>
+                AI
+            </a>
+        </span>
+        
+    </div>
+
+    <a href="/2022/09/27/后门攻击概述/ " class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+
+    <a href="/2022/08/13/gitlab/">
+        <h2>
+            使用git进行项目管理和团队开发
+        </h2>
+    </a>
+
+    <div class="category-and-date">
+
+        
+        <span class="category">
+            <a href="/categories/tuition">
+                <span class="icon">
+                    <a-icon type="book" theme="filled" /></span>
+                tuition
+            </a>
+        </span>
+        
+
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/8/13
+        </span>
+
+    </div>
+
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            <p>本文总结了在小学期时学到的一项必备技能——使用git进行项目管理。因为小学期需要大量代码书写，以及会有几个团队合作项目，这个时候使用git进行项目管理和团队开发就十分必要了，在使用过程中也确实极大地提升了代码和合作效率。</p>
+<p>outline:</p>
+<ul>
+<li>工具安装与配置</li>
+<li>具体实现及功能</li>
+</ul>
+            
+            
+        </div>
+    </div>
+
+    <div class="post-tags">
+        
+        <span class="icon">
+            <a-icon type="tags" theme="filled" />
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/git" style=color:#ff7d73>
+                git
+            </a>
+        </span>
+        
+    </div>
+
+    <a href="/2022/08/13/gitlab/ " class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+
+    <a href="/2022/03/12/智能小车开发/">
+        <h2>
+            简单的智能小车开发
+        </h2>
+    </a>
+
+    <div class="category-and-date">
+
+        
+        <span class="category">
+            <a href="/categories/project">
+                <span class="icon">
+                    <a-icon type="book" theme="filled" /></span>
+                project
+            </a>
+        </span>
+        
+
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/3/12
+        </span>
+
+    </div>
+
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            <h3 id="嵌入式开发的初尝试"><a href="#嵌入式开发的初尝试" class="headerlink" title="嵌入式开发的初尝试"></a>嵌入式开发的初尝试</h3><p>因为上的一门课，我初次接触到了嵌入式开发的一些知识和原理，并进行了十分粗浅的尝试。本次尝试是基于arduino的智能小车进行，并通过c语言对其进行开发。</p>
+<p>大体思路概括：首先围绕一块arduino的主板进行硬件的组装，包括电机、舵机、红外寻迹模块、超声波测距等。小车组装完毕后，在计算机上使用arduino IDE编写代码，并可以把代码传到智能小车上，智能小车就可以按照程序运行。</p>
+<p>（其中使用arduino来编程，是因为其具有如下好处：与arduino板匹配度高，可直接传递代码；与其他电子开发平台相比，程序代码简单明了，虽然也是用的c语法，但其具有强大的库文件，使得代码无比简单明了；arduino是一个开源平台，有着丰富的代码库）</p>
+<p>本文从三个部分进行介绍智能小车开发的全过程：</p>
+<ul>
+<li>硬件组装</li>
+<li>软件开发</li>
+<li>最终运行</li>
+</ul>
+            
+            
+        </div>
+    </div>
+
+    <div class="post-tags">
+        
+        <span class="icon">
+            <a-icon type="tags" theme="filled" />
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/嵌入式" style=color:#ffa2c4>
+                嵌入式
+            </a>
+        </span>
+        
+    </div>
+
+    <a href="/2022/03/12/智能小车开发/ " class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+
+    <a href="/2022/02/27/搭建博客心得/">
+        <h2>
+            利用GitHub page 与 hexo 搭建博客教程及心得
+        </h2>
+    </a>
+
+    <div class="category-and-date">
+
+        
+        <span class="category">
+            <a href="/categories/tuition">
+                <span class="icon">
+                    <a-icon type="book" theme="filled" /></span>
+                tuition
+            </a>
+        </span>
+        
+
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/2/27
+        </span>
+
+    </div>
+
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            <p>本文是第一篇技术教程方面的博客，是基于本人在参考无数链接，碰到的无数问题，搭建数天才完成的博客搭建来写的，以此总结搭建博客的具体思路。此处使用的方式是使用github提供的域名与hexo前端搭建工具共同完成的，也是相比之下最适合新手、最简单的方式。不过搭建思路与模板是已经确定好的，在此基础上还可以进一步扩展的有：自己租服务器和域名搭建博客（只需在github pages配置那里改成服务器配置即可），自己完成前端搭建（在模板进行改动或自己根据模板的文件结构完成自己手写的博客搭建）等。</p>
+<p>Outline:</p>
+<ul>
+<li>搭建教程</li>
+<li>可能遇到的问题及解决</li>
+<li>心得体会</li>
+</ul>
+            
+            
+        </div>
+    </div>
+
+    <div class="post-tags">
+        
+        
+    </div>
+
+    <a href="/2022/02/27/搭建博客心得/ " class="go-post">
+        阅读全文
+    </a>
+</div>
+
+<div class="post">
+
+    <a href="/2022/02/26/begining of all/">
+        <h2>
+            
+        </h2>
+    </a>
+
+    <div class="category-and-date">
+
+        
+
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/2/26
+        </span>
+
+    </div>
+
+    <div class="excerpt">
+        <div class="content" v-pre>
+            
+            
+            <h1 id="The-begining-of-all"><a href="#The-begining-of-all" class="headerlink" title=" The begining of all"></a> The begining of all</h1><h2 id="About-me"><a href="#About-me" class="headerlink" title="About me"></a>About me</h2><p>我是一名现就读于WHU国家网络安全学院的21级本科生。</p>
+<p>An undergraduate student in WHU SCSE.</p>
+<p>I am interested in AI  |  web security |  blockchain  |  designing …</p>
+<h2 id="About-the-blog"><a href="#About-the-blog" class="headerlink" title="About the blog"></a>About the blog</h2><p>这个博客会承载着 学习中的发现与总结 &amp; 一些项目的探索与尝试 &amp; 一些感悟与思考</p>
+<p>As a beginner just stepping into the computer science, I want to record my feelings &amp; thoughts &amp; achievements alongside my growing trial ,by the vlog.</p>
+<p>I would like to say , it’s a blog for tech , and a blog for life .  </p>
+<hr>
+<p>I am interested in AI  |  web security |  blockchain  |  designing …</p>
+<p>If interested ,  welcome to contact me :</p>
+<ul>
+<li>Q Q : 2594164433 </li>
+<li>e-mail: <a href="mailto:&#x73;&#101;&#114;&#101;&#110;&#101;&#x5f;&#x73;&#105;&#118;&#x79;&#x40;&#x6f;&#x75;&#116;&#108;&#x6f;&#x6f;&#107;&#46;&#99;&#111;&#x6d;">&#x73;&#101;&#114;&#101;&#110;&#101;&#x5f;&#x73;&#105;&#118;&#x79;&#x40;&#x6f;&#x75;&#116;&#108;&#x6f;&#x6f;&#107;&#46;&#99;&#111;&#x6d;</a></li>
+</ul>
+
+            
+        </div>
+    </div>
+
+    <div class="post-tags">
+        
+        
+    </div>
+
+    <a href="/2022/02/26/begining of all/ " class="go-post">
+        阅读全文
+    </a>
+</div>
+
+
+             
+<div class="page-current">
+
+    <div class="prev">
+        
+    </div>
+
+    <div class="page-index">
+
+        
+
+        <span class="current">
+            1
+        </span>
+
+        
+
+    </div>
+
+    <div class="next">
+        
+    </div>
+
+</div>
+
+        </div>
+    </div>
+    
+    <div id="home-card">
+        <a-affix :offset-top="card_top">
+    <a-card class="card-style" style="width: 300px">
+        <div class="avatar">
+            <img src="https://pic2.zhimg.com/v2-ab977c62c1f645c4fc56020c9fb833fc_720w.jpg?source=d16d100b " alt="头像">
+        </div>
+        <div class="name">
+            Serene Sivy
+        </div>
+        <div class="descriptions">
+            
+            <div class="description">
+                Thinking in ration ,
+hoping in fervor.
+            </div>
+            
+        </div>
+        <div class="icon-links">
+            
+            <span class="icon-link">
+                <a target="_blank" rel="noopener" href="https://github.com/serene-sivy">
+
+                    
+                    <a-icon type="github"
+                        theme="filled" />
+                    
+                </a>
+            </span>
+            
+            <span class="icon-link">
+                <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/shi-dai-ju-lun-4-29">
+
+                    
+                    <a-icon type="zhihu"
+                        theme="filled" />
+                    
+                </a>
+            </span>
+            
+        </div>
+        <div class="friend-links">
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/shi-dai-ju-lun-4-29">
+                    知乎
+                </a>
+            </div>
+            
+        </div>
+    </a-card>
+</a-affix>
+    </div>
+    
+</div>
+                     
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 2022 - 2022 Serene
+            <span class="footer-icon">
+                <a-icon type="flag" theme="filled" /></span>
+            @Serene Sivy
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/korilin/hexo-theme-particle">Particle Theme</a></div>
+        
+    </div>
+
+</footer>
+
+<script src="/js/highlight.min.js"></script>
+<script src="/js/particle.js"></script>
+                </div>
+            </div>
+        </transition>
+    </div>
+
+    <script>
+    new Vue({
+        el: "#layout",
+        data: {
+            show_page: false,
+            onload_menu: false,
+            menu_show: false,
+            card_top: 100
+        },
+        created: function () {
+            var that = this
+            window.onload = function () {
+                that.show_page = true
+                document.getElementById("loadcontent").style.opacity = 0
+                setTimeout(function () {
+                    document.getElementById("loadleft").style.width = 0
+                    document.getElementById("loadright").style.width = 0
+                }, 300)
+                setTimeout(function () {
+                    document.getElementById("loading").style = "display:none"
+                }, 600)
+            }
+        },
+        mounted: function () {
+            var that = this
+            window.addEventListener('scroll', function (e) {
+                that.menu_show = false
+            })
+        },
+        methods: {
+            home_click: function () {
+                window.scrollTo({
+                    top: window.innerHeight - 80,
+                    behavior: "smooth",
+                });
+            }
+        }
+    })
+</script>
+
+</body>
+
+</html>

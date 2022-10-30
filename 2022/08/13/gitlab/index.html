@@ -1,0 +1,400 @@
+
+<!DOCTYPE html>
+<html lang="en ">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serene || 使用git进行项目管理和团队开发</title>
+    <meta name="author" content="Serene Sivy">
+    <meta name="description" content=" ">
+    <meta name="keywords" content=" ">
+    <link rel="icon" href="/https://pic2.zhimg.com/v2-ab977c62c1f645c4fc56020c9fb833fc_720w.jpg?source=d16d100b">
+    <link rel="stylesheet" href="/css/antd.min.css">
+    
+    <link rel="stylesheet" href="/css/full-theme.css">
+    
+    <script src="/js/vue.js"></script>
+    <script src="/js/antd.min.js"></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+
+    <div id="loading"
+        style="height: 100vh; width: 100%; position: fixed;display: flex;z-index: 200; justify-content: space-between;">
+        <div id="loadleft" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div id="loadright" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div
+            style="position: fixed; height: 100vh; width: 100%;display: flex;justify-content: center;align-items: center;">
+            <div id="loadcontent"
+                style="width:400px;height:400px;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px#a3ddfb; text-align:center;opacity:1;transition:opacity 0.3s ease-out;">
+                <div>
+                    <h2>LOADING...</h2>
+                    <p>加载过慢请开启缓存(浏览器默认开启)</p>
+                    <div>
+                        <img src="/dancingkitty.gif" alt="loading">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="layout">
+        <transition name="into">
+            <div v-show="show_page" style="display: none;">
+                <div id="menu_show">
+                     
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Serene</span>
+        </a>
+        
+        <a href="/">
+            <span>
+                <a-icon type="home" theme="filled" />
+            </span>
+            <span>home</span>
+        </a>
+        
+        <a href="/archives">
+            <span>
+                <a-icon type="folder" theme="filled" />
+            </span>
+            <span>archives</span>
+        </a>
+        
+        <a href="/categories">
+            <span>
+                <a-icon type="book" theme="filled" />
+            </span>
+            <span>categories</span>
+        </a>
+        
+        <a href="/tags">
+            <span>
+                <a-icon type="tags" theme="filled" />
+            </span>
+            <span>tags</span>
+        </a>
+        
+    </div>
+
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div :class="'title'" @click="menu_show=!menu_show">
+            <span style="margin-right: 10px;">
+                <a-icon type="appstore" theme="filled" />
+            </span>
+            <span>Serene</span>
+        </div>
+        <div class="items" v-show="menu_show">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="home" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">home</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="folder" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">archives</div>
+                </div>
+            </a>
+            
+            <a href="/categories">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="book" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">categories</div>
+                </div>
+            </a>
+            
+            <a href="/tags">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="tags" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        <div class="curtain" v-show="menu_show"></div>
+    </div>
+
+</nav>
+                </div>
+
+                <div id="main">
+                     
+<link rel="stylesheet" href="/css/post-body.css">
+<div class="article">
+    <div>
+        <h1>使用git进行项目管理和团队开发 </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/8/13
+        </span>
+
+        
+        <span class="category">
+            <a href="/categories/tuition">
+                <span class="icon">
+                    <a-icon type="book" theme="filled" />
+                </span>
+                tuition
+            </a>
+        </span>
+        
+
+        
+
+        <span class="tags">
+            <span class="icon">
+                <a-icon type="tags" theme="filled" />
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/git" style=color:#00a596>
+                    git
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+
+    <div class="content" v-pre>
+        <p>本文总结了在小学期时学到的一项必备技能——使用git进行项目管理。因为小学期需要大量代码书写，以及会有几个团队合作项目，这个时候使用git进行项目管理和团队开发就十分必要了，在使用过程中也确实极大地提升了代码和合作效率。</p>
+<p>outline:</p>
+<ul>
+<li>工具安装与配置</li>
+<li>具体实现及功能</li>
+</ul>
+<span id="more"></span>
+
+<h3 id="工具安装"><a href="#工具安装" class="headerlink" title="工具安装"></a>工具安装</h3><p>此处所需要的工具只有git。关于git的安装可参考 <a target="_blank" rel="noopener" href="https://blog.csdn.net/mukes/article/details/115693833">CSDN：Git 详细安装教程</a></p>
+<p>git的功能十分强大，还是一个很好的shell工具，这里主要要用到的功能是版本控制和与远程仓库相关联的功能。</p>
+<p>这里使用的是gitlab进行远程仓库的存储和团队的共享。</p>
+<p>上面的教程也提到下载完git之后需要将ssh远程配对，并且要将本地ssh密钥保存好。上面的教程是绑定到了github。可以用之前的密钥再去配置gitlab，也可以使用git指令再生成一个密钥去配置。</p>
+<p>这里跟github有一点点小不同的地方。</p>
+<p>生成密钥ssh时，应输入的指令为：</p>
+<pre><code>$ ssh-keygen -t rsa -C “yourgitlab@email.com”
+</code></pre>
+<p>之后在.&#x2F;ssh文件夹里找到id_rsa的PUB文件后复制粘贴到gitlab的密钥配置中（在gitlab的设置中找到）</p>
+<p>查看是否配置成功</p>
+<ul>
+<li>输入命令 ssh -T git@gitlab域名.com</li>
+<li>或者简单粗暴直接clone工程</li>
+</ul>
+<p>选择直接clone，要先索引到要clone的目录下，命令 git clone <a href="mailto:&#x67;&#x69;&#116;&#x40;&#103;&#x69;&#x74;&#108;&#97;&#98;&#x2e;&#x63;&#x6f;&#x6d;">&#x67;&#x69;&#116;&#x40;&#103;&#x69;&#x74;&#108;&#97;&#98;&#x2e;&#x63;&#x6f;&#x6d;</a>:xxx&#x2F;xxx.git</p>
+<p>成功后，工具的安装和配置就已全部完成。</p>
+<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><p>首先明确几个概念</p>
+<ol>
+<li>仓库   仓库就是repository，就是一个目录，目录里面的所有文件都被Git管理起来，每个文件的修改、删除，Git都能跟踪。</li>
+<li>工作区   工作区就是资源管理器里看到的文件。</li>
+<li>暂存区    即我们的代码完成了一个阶段可以暂时使用本地保存一下。被保存到的地方也就是 暂存区。</li>
+<li>远程仓库    与本地仓库相对，是将文件保存到远端去，以防止一些因素导致本地文件的丢失，也方便进行团队协作。</li>
+<li>分支    分支就是远程仓库在主干之外的分仓库，一般团队协作时每个人可以把自己的文件上传到自己的分支上去，以防止对主干的干扰，同时也不需要经常从远端pull下来应对一些改变。</li>
+</ol>
+<p>明确了这些，就可以进行操作。</p>
+<h4 id="上传流程"><a href="#上传流程" class="headerlink" title="上传流程"></a>上传流程</h4><p>首先选择一个文件夹做自己的本地仓库，来使git帮我们管理这个文件夹，这里使用</p>
+<pre><code class="git">git init
+</code></pre>
+<p>之后git会创建.git隐藏文件夹，然后这个文件夹git就开始管理了。</p>
+<p>之后 我们完成了一段代码，保存之后想让git保管一下，首先要git add，这里有两个指令</p>
+<pre><code class="git">git add filename   # 将文件添加到暂存区
+
+git add    # 将本地仓库所有的文件添加到暂存区
+</code></pre>
+<p>关于暂存区，上面已经提到。暂存区的意义不大，要想让git管理还要一步是将文件上传到本地分支上，即指令</p>
+<pre><code class="git">git commit -m &quot;提交说明&quot;   # 使用commit将暂存区的文件进行提交到本地的分支
+</code></pre>
+<p>提交说明里的内容可以随意，最后会显示到gitlab上的提交记录上。add指令可以让我们不用把文件一个一个地commit，可以add一些之后一块commit到本地仓库。</p>
+<p>以上是基本指令，还有一些指令可以辅助我们完成一些功能：</p>
+<pre><code class="git">git commit -am &quot;本次提交的说明&quot;   # add 和 commit 的合并，便捷写法，未跟踪的文件是无法提交
+
+# 以下两个指令：跳过验证自动提交
+git commit --no-verify
+git commit -n
+
+git commit --amend  # 撤销上一次提交，并将暂存区文件重新提交，编辑器会弹出上一次提交的信息，可以在这里修改提交信息
+
+git commit --amend -m &quot;本次提交的说明&quot;  # 修复提交，同时修改提交信息
+
+git commit --amend --no-edit  # 修改文件内容并合并到上一次的commit变更当中，但不修改提交的信息
+</code></pre>
+<p>关于amend的使用，可以参考一下这篇回答，个人比较喜欢：<a target="_blank" rel="noopener" href="https://blog.csdn.net/wq6ylg08/article/details/88862025?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166035966216781647543210%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=166035966216781647543210&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~pc_rank_34-8-88862025-null-null.142%5Ev40%5Epc_rank_34_2,185%5Ev2%5Econtrol&utm_term=git%20commit%20--amend&spm=1018.2226.3001.4187">git commit –amend命令</a></p>
+<p>同时还可以查看工作区和暂存区和与远程仓库的状态，用指令</p>
+<pre><code class="git">git status
+</code></pre>
+<p>查看的样子是这样</p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/vtPjdH"><img src="https://s1.ax1x.com/2022/08/13/vtPjdH.png" alt="vtPjdH.png"></a></p>
+<p>上面那句话的意思是 本地仓库比远程仓库多了一个commit，还没有传到远程仓库。</p>
+<p>下面的意思是这个文件夹下的.vscode这个文件还没有被git跟踪。</p>
+<p>以及 查看提交记录：</p>
+<pre><code class="git">git log
+</code></pre>
+<p>接下来，就要做本地与远程仓库的关联。一般有两种方式，分别是ssh和http，在gitlab的该仓库中的clone那里都可以找到链接，从而进行关联。使用的指令都是</p>
+<pre><code class="git">git remote add origin +链接
+</code></pre>
+<p>关联后自动关联到main或master分支，若要推送到远程仓库只需</p>
+<pre><code class="git">git push origin +分支名
+</code></pre>
+<p>若远程仓库发生变化，则需先</p>
+<pre><code class="git">git pull
+</code></pre>
+<p>这里要区分一下git pull、git fetch、git clone。</p>
+<p>git pull &#x3D; git fetch(只是保存到本地) + git merge</p>
+<p>git clone是从无到有的过程，即本地没有版本库时使用。</p>
+<h4 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h4><p>分支管理的目的就是将当前已经可以发布模块放在一个分支，在另外一个分支进行进一步开发，开发完成后可以进行分支合并。</p>
+<p>在gitlab上默认的分支是master（主分支），也只有这一个分支，其他分支我们自行建立。</p>
+<p>分支的主要操作：</p>
+<pre><code class="git">git branch  # 查看分支（*指向的为当前的分支）
+
+git branch&lt;name&gt;  # 创建分支
+
+git checkout&lt;name&gt;  # 切换分支
+
+git checkout -b &lt;name&gt;  # 创建加切换分支
+
+git merge &lt;name&gt;  # 合并某分支到当前分支
+
+git branch -d&lt;name&gt;  # 删除分支
+</code></pre>
+<p>本地新建分支后，远程仓库也自动建立分支，并将操作同步到该分支上进行改变。</p>
+<p>在实际的开发中，一般master主分支是受保护的，也就是说只有项目的负责人才有权限在master分支上进行相关的操作，其他普通开发者只能向各自分支进行推送，那么普通开发者怎么才能让负责人知道自己可以合并分支，这就需要在gitlab上发起合并请求，负责人收到请求后开始合并。</p>
+<p>分支合并时很大可能会出现冲突，即两相同文件的内容不一样，这个时候就要解决冲突，即选择其中一个为最终版本再进行合并。</p>
+<p>可以用git status 查看冲突的文件，再用cat去查看。git用&lt;&lt;&lt;&lt;&lt;&lt;&lt;，&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;，&gt;&gt;&gt;&gt;&gt;&gt;&gt;标记出不同分支的内容，其中HEAD代表当前的代码，&gt;&gt;&gt;&gt;代表其他版本冲突的代码，我们打开冲突的文件，将代码冲突进行修改之后，将HEAD，&gt;&gt;&gt;等标志删除之后重新进行提交（add-commit）即可。提交完成后再merge合并即可。</p>
+<p>若推送到远程出现冲突时，则先用git pull（上面有所提到）在拉取完成后，会自动提示我们冲突的文件，我们按照相同的方式进行修改后重新提交推送即可。</p>
+<h4 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h4><p>当我们在开发的时候，将文件进行添加到暂存区然后提交到本地的版本库。版本库会将我们每一次的操作来进行一次存档。那么久方便我们很容易回退到某个版本。</p>
+<p>我们可以使用 git diff HEAD – filename 命令可以查看工作区和版本库里面最新版本的区别，如果确定需要回退，那就按照下述的方式来进行回退。我们分几个情境来进行版本回退</p>
+<p><strong>1、当前编辑的文件还没有提交到暂存区</strong></p>
+<p>如果只是做了简单的修改，我们可以手动恢复到我们想要的状态，但是加入修改过多，已经忘记自己修改了什么内容，那么使用</p>
+<p>git checkout – file 可以丢弃工作区的修改，在这里可能有两种情况：</p>
+<p>一种是file自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；</p>
+<p>一种是readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。简单说就是让这个文件回到最近一次git commit或git add时的状态。</p>
+<p><strong>2、文件已经提交到了暂存区但是并没有提交到本地的版本库</strong></p>
+<p>git reset HEAD <file> 可以把暂存区的修改撤销掉（unstage），重新放回工作区。git reset命令既可以回退版本，也可以把暂存区的修改回退到工作区。当我们用HEAD时，表示最新的版本。</p>
+<p>使用checkout 就可以丢弃工作区的修改了。</p>
+<p><strong>3、已经将文件存储到暂存区并提交到了本地版本库</strong></p>
+<p>当我们进行回退的时候，要知道我们要回退到哪个版本，在git中使用HEAD表示当前的版本，那么如果要是回退到上个版本的话就是使用： git reset –hard HEAD^ 我们的版本就会被还原到上一个版本，使用HEAD^可以回退到上上一个版本，当然&#x3D;&#x3D;再往上100个版本写100个比较容易数不过来，所以写成HEAD~100。</p>
+<p>在使用git reset的时候，有两个参数可以选择，分别是git reset –hard&#x2F;soft，hard和soft的主要区别在于，soft只是回退了commit的信息，也就是指向之前的commit信息，但是对应的文件并不会发生改变。而使用hard方式commit信息会指向之前的信息，同时在工作区的文件也会跟随者进行变化。</p>
+<p><strong>4、当我们回退后又想前进到回退前的版本，git也提供了对应的操作方式</strong></p>
+<p>我们可以使用 git reflog 命令查看操作记录，来判断我们要回到哪个版本。</p>
+<p>删除文件恢复</p>
+<p>在git中，删除也是一个修改操作，一般会有以下两种操作。</p>
+<p><strong>1、误删除文件（已经add或者已经commit）</strong></p>
+<p>在本机上将文件进行删除后，我们介可以使用git status检测到文件的变动。但是原来的文件必须是已经add操作的</p>
+<p>使用git checkout – 误删除文件名称，和上文介绍的恢复工作区状态的指令相同。</p>
+<p><strong>2、确定要删除文件</strong></p>
+<p>当我们在资源管理器将某个文件删除，使用git status 会提示我们使用 git rm 进行删除文件</p>
+<p>使用 git rm （文件名称 然后进行commit</p>
+<p>当然也可以使用git add . 来添加全部修改或新增的文件</p>
+<p>注意，当我们没有进行add 和commit操作的时候我们是无法从原来的版本库进行恢复的，也就是直接新建一个文件，没有经过任何操作，是无法恢复的。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>以上是关于git的一些基本操作，还有一些比如分支和版本回退的延伸，目的都是为了高效地团队协作，无需再通过社交媒体发送文件的方式。同时也能方便自己在修改代码时能够及时回退之前的版本，而且能直观看出不同之处。git的版本控制是一个太过方便和强大的功能，这里我仅仅是根据自己的所学和一些尝试实践做的一点总结。相信以后会越来越多地使用到这个工具。</p>
+
+    </div>
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <div id="comment">
+        <div id="gitalk-container">
+        </div>
+    </div>
+    
+</div>
+                     
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 2022 - 2022 Serene
+            <span class="footer-icon">
+                <a-icon type="flag" theme="filled" /></span>
+            @Serene Sivy
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/korilin/hexo-theme-particle">Particle Theme</a></div>
+        
+    </div>
+
+</footer>
+
+<script src="/js/highlight.min.js"></script>
+<script src="/js/particle.js"></script>
+                </div>
+            </div>
+        </transition>
+    </div>
+
+    <script>
+    new Vue({
+        el: "#layout",
+        data: {
+            show_page: false,
+            onload_menu: false,
+            menu_show: false,
+            card_top: 100
+        },
+        created: function () {
+            var that = this
+            window.onload = function () {
+                that.show_page = true
+                document.getElementById("loadcontent").style.opacity = 0
+                setTimeout(function () {
+                    document.getElementById("loadleft").style.width = 0
+                    document.getElementById("loadright").style.width = 0
+                }, 300)
+                setTimeout(function () {
+                    document.getElementById("loading").style = "display:none"
+                }, 600)
+            }
+        },
+        mounted: function () {
+            var that = this
+            window.addEventListener('scroll', function (e) {
+                that.menu_show = false
+            })
+        },
+        methods: {
+            home_click: function () {
+                window.scrollTo({
+                    top: window.innerHeight - 80,
+                    behavior: "smooth",
+                });
+            }
+        }
+    })
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: 'serene-sivy',
+        clientSecret: '2594164433cjs',
+        repo: 'comments',      // The repository of store comments,
+        owner: 'serene-sivy',
+        admin: ['serene-sivy'],
+        language: 'en',
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: true  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+</body>
+
+</html>

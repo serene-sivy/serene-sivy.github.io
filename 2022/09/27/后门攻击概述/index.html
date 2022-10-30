@@ -1,0 +1,391 @@
+
+<!DOCTYPE html>
+<html lang="en ">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serene || 学习笔记 | 深度学习系统的后门攻击概述</title>
+    <meta name="author" content="Serene Sivy">
+    <meta name="description" content=" ">
+    <meta name="keywords" content=" ">
+    <link rel="icon" href="/https://pic2.zhimg.com/v2-ab977c62c1f645c4fc56020c9fb833fc_720w.jpg?source=d16d100b">
+    <link rel="stylesheet" href="/css/antd.min.css">
+    
+    <link rel="stylesheet" href="/css/full-theme.css">
+    
+    <script src="/js/vue.js"></script>
+    <script src="/js/antd.min.js"></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+
+    <div id="loading"
+        style="height: 100vh; width: 100%; position: fixed;display: flex;z-index: 200; justify-content: space-between;">
+        <div id="loadleft" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div id="loadright" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div
+            style="position: fixed; height: 100vh; width: 100%;display: flex;justify-content: center;align-items: center;">
+            <div id="loadcontent"
+                style="width:400px;height:400px;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px#a3ddfb; text-align:center;opacity:1;transition:opacity 0.3s ease-out;">
+                <div>
+                    <h2>LOADING...</h2>
+                    <p>加载过慢请开启缓存(浏览器默认开启)</p>
+                    <div>
+                        <img src="/dancingkitty.gif" alt="loading">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="layout">
+        <transition name="into">
+            <div v-show="show_page" style="display: none;">
+                <div id="menu_show">
+                     
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Serene</span>
+        </a>
+        
+        <a href="/">
+            <span>
+                <a-icon type="home" theme="filled" />
+            </span>
+            <span>home</span>
+        </a>
+        
+        <a href="/archives">
+            <span>
+                <a-icon type="folder" theme="filled" />
+            </span>
+            <span>archives</span>
+        </a>
+        
+        <a href="/categories">
+            <span>
+                <a-icon type="book" theme="filled" />
+            </span>
+            <span>categories</span>
+        </a>
+        
+        <a href="/tags">
+            <span>
+                <a-icon type="tags" theme="filled" />
+            </span>
+            <span>tags</span>
+        </a>
+        
+    </div>
+
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div :class="'title'" @click="menu_show=!menu_show">
+            <span style="margin-right: 10px;">
+                <a-icon type="appstore" theme="filled" />
+            </span>
+            <span>Serene</span>
+        </div>
+        <div class="items" v-show="menu_show">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="home" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">home</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="folder" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">archives</div>
+                </div>
+            </a>
+            
+            <a href="/categories">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="book" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">categories</div>
+                </div>
+            </a>
+            
+            <a href="/tags">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="tags" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        <div class="curtain" v-show="menu_show"></div>
+    </div>
+
+</nav>
+                </div>
+
+                <div id="main">
+                     
+<link rel="stylesheet" href="/css/post-body.css">
+<div class="article">
+    <div>
+        <h1>学习笔记 | 深度学习系统的后门攻击概述 </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/9/27
+        </span>
+
+        
+        <span class="category">
+            <a href="/categories/Research">
+                <span class="icon">
+                    <a-icon type="book" theme="filled" />
+                </span>
+                Research
+            </a>
+        </span>
+        
+
+        
+
+        <span class="tags">
+            <span class="icon">
+                <a-icon type="tags" theme="filled" />
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/AI" style=color:#03a9f4>
+                    AI
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+
+    <div class="content" v-pre>
+        <h3 id="后门攻击"><a href="#后门攻击" class="headerlink" title="后门攻击"></a>后门攻击</h3><p>主要介绍下人工智能安全近年来十分重要的一个领域，后门攻击领域。以一个刚刚进入此领域的视角介绍人工智能领域后门攻击的攻击方法、攻击模式、相关术语、相关衡量指标以及近年来的发展情况，同时引申出应对不同后门攻击手段而产生的不同的防御模式。</p>
+<p><img src="https://s1.ax1x.com/2022/09/27/xeSbiF.png" alt="xeSbiF.png"></p>
+<h2 id="outline"><a href="#outline" class="headerlink" title="outline"></a>outline</h2><ul>
+<li>深度学习系统的后门攻击概述</li>
+<li>针对后门攻击的防御</li>
+</ul>
+<span id="more"></span>
+
+<h3 id="后门攻击-1"><a href="#后门攻击-1" class="headerlink" title="后门攻击"></a>后门攻击</h3><h4 id="相关术语"><a href="#相关术语" class="headerlink" title="相关术语"></a>相关术语</h4><ul>
+<li>用户：等同于使用者（user）、防御者(defender)</li>
+<li>攻击者：即attacker，是往神经网络中植入后门的敌手</li>
+<li>触发器输入：即trigger input,是带有能够激活后门的Trigger的输入，等同于trigger samples,trigger instances,adversarial input，poisoned input         guassian noise，blend（引入hyperparameter 透明度）</li>
+<li>目标类：即target class,即模型在接受Trigger input后其输出为攻击者选中的class，等同于target label</li>
+<li>源类：即source class，指在input不带有Trigger时，正常情况下会被模型输出的类，等同于source label</li>
+<li>潜在表示：即latent representation，等同于latent feature，指高维数据（一般特指input）的低维表示。Latent representation是来自神经网络中间层的特征。</li>
+<li>数字攻击：即digital attack，指对digital image做出像素上的对抗性扰动（可以简单理解为计算机上的攻击，比如在0x01中看到的自动驾驶的例子）</li>
+<li>物理攻击：即physical attack，指对物理世界中的攻击对象做出对抗性扰动，不过对于系统捕获的digital input是不可控的（可以理解为在现实世界中发动攻击，比如在0x01中看到的交通标志的例子，那个白色的小方块是我们在物理世界中添加的，至于叠加上小方块后的整个stop图像被摄像机捕获为digital input时究竟变成什么样，我们是无法控制的）（该领域最近的大火方向）</li>
+</ul>
+<h4 id="相互关系"><a href="#相互关系" class="headerlink" title="相互关系"></a>相互关系</h4><p>（见上图）</p>
+<ol>
+<li><p>数据投毒</p>
+<p>先说出现最早的攻击手段—数据投毒攻击，从上图可以看到发生在数据收集与预处理阶段。这种攻击手段要实现的目标就是影响模型推理时的准确率，这里要注意，数据投毒攻击是影响整体的准确率，是全面降低了模型的性能，所以数据投毒攻击也被称为可用性攻击。后门攻击可以通过数据投毒实现，但是对于良性样本（即不带有Trigger）其推理准确率是要维持住的，而只是在面对带有Trigger的样本时，推理才会出错，而且出错的结果也是要攻击者控制的。</p>
+</li>
+<li><p>对抗样本攻击</p>
+<p>对抗样本指通过故意对输入样例添加难以察觉的扰动使模型以高置信度给出一个错误的输出，即添加噪点。</p>
+<p>​    与后门攻击区别</p>
+<ul>
+<li>对抗样本在模型部署后对其推理阶段进行攻击，而后门攻击从数据收集阶段就开始了，基本贯穿了深度学习系统整个生命周期。</li>
+<li>对抗样本在执行相同任务的不同模型间具有可迁移性，而后门攻击中的trigger input不具有这种性质。</li>
+<li>对抗样本和后门攻击一样都是为了让模型误分类，但是后门攻击给攻击者提供更大的灵活度，毕竟模型中的后门都是攻击者主动植入的。此外，对抗样本需要为每个input精心设计不同的扰动，而后门攻击中只需要在input上叠加trigger即可。</li>
+<li>对于攻击场景而言，对抗攻击在拿到模型后可以直接上手，只是会区分黑盒和白盒情况；而后门攻击面对的场景一般为：攻击者对模型植入后门后，将其作为pretrained model公开发布，等受害者拿过来使用或者retrain后使用，此外一些攻击方案还会要求对数据集进行投毒，这就需要攻击者有对训练数据的访问权限，可以看到其假设较强，攻击场景比较受限。</li>
+</ul>
+</li>
+<li><p>通用对抗补丁（Universal Adversarial Patch,UAP）</p>
+<p>UAP可以被认为是对抗样本的一种特殊形式。对抗样本是对每一个样本生成其特定的扰动，而UAP则是对任何样本生成通用的精心构造的扰动。(通常最不隐蔽)</p>
+<p>reference:<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2005.09257">Bias-based Universal Adversarial Patch Attack for Automatic Check-out</a></p>
+</li>
+</ol>
+<h4 id="攻击模式"><a href="#攻击模式" class="headerlink" title="攻击模式"></a>攻击模式</h4><p><a target="_blank" rel="noopener" href="https://imgse.com/i/xeSLRJ"><img src="https://s1.ax1x.com/2022/09/27/xeSLRJ.png" alt="xeSLRJ.png"></a></p>
+<p>两种攻击模式：</p>
+<ul>
+<li>all-to-one   e.g.  <em>c</em>(<em>y</em>) &#x3D; c</li>
+<li>all-to-all     e.g.   <em>c(y)</em> &#x3D; y+1</li>
+</ul>
+<p>方向：</p>
+<ul>
+<li>在干净样本上输出正确</li>
+<li>使poisoned样本尽可能接近target class</li>
+<li>使trigger尽可能隐蔽</li>
+</ul>
+<p>常用的网络架构：</p>
+<p><img src="https://img2018.cnblogs.com/blog/1551331/201908/1551331-20190813215839396-1940809828.png" alt="badnets"></p>
+<ol>
+<li>BadNet</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/xeSOz9"><img src="https://s1.ax1x.com/2022/09/27/xeSOz9.png" alt="xeSOz9.png"></a></p>
+<p>​                                                                                                   (BadNets)</p>
+<p>后门模型的训练过程包括两个部分：首先通过叠加trigger在原图片x上得到投毒后的数据x’，同时x’的标签修改为攻击者选中的target class；然后在由毒化后的数据与良性数据组成的训练集上进行训练即可。从第三行推理阶可以看到，trigger input会被后门模型分类为0，而良性样本则还是被分类为相应的标签。</p>
+<p>局限：需要能够对数据进行投毒，而且还要重新训练模型以改变模型某些参数从而实现后门的植入。</p>
+<p>reference:Tianyu Gu, Brendan Dolan-Gavitt, Siddharth Garg:BadNets: Identifying Vulnerabilities in the Machine Learning Model Supply Chain</p>
+<p>2.TrojanNet</p>
+<p>如下的方法不像以前的方法都需要对数据投毒然后重训练模型以注入后门。他们提出的方法不会修改原始模型中的参数，而是将一个小的木马模块（称之为TrojanNet）插入到模型中。</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/xeSjMR"><img src="https://s1.ax1x.com/2022/09/27/xeSjMR.png" alt="xeSjMR.png"></a></p>
+<p>​                                                                                           (TrojanNet)</p>
+<p>蓝色背景的部分是原模型，红色部分是TrojanNet。最后的联合层合并了两个网络的输出并作出最后的预测。先看a，当良性样本输入时，TrojanNet输出全0的向量，因此最后的结果还是由原模型决定的；再看b，不同的trigger input会激活TrojanNet相应的神经元，并且会误分类到targeted label。在上图中，当我们输入编号为0的trigger input时，模型最后的预测结果为猫，而当输入编号为1000的trigger input时，模型的预测结果为鸟。</p>
+<p>这种方案的优点非常明显，这是一种模型无关的方案，这意味着可以适用于不同于的深度学习系统，并且这种方法不会降低良性样本预测时的准确率。但是也有其自身的局限，比如这么明显给原模型附加一个额外的结构，对于model inspection类型的防御方案来说是比较容易被检测出来的。</p>
+<p>reference:Tang R, Du M, Liu N, et al. An embarrassingly simple approach for trojan attack in deep neural networks</p>
+<h4 id="一般的评估指标"><a href="#一般的评估指标" class="headerlink" title="一般的评估指标"></a>一般的评估指标</h4><ol>
+<li>Attack success rate(ASR)：用来衡量trigger input被模型成功误分类到target class的概率。一般要求有效的后门攻击有高ASR。</li>
+<li>Clean accuracy drop(CAD)：这是衡量植入后门的神经网络与原网络在面对良性样本时的表现差异，可以刻画出植入后门给神经网络性能带来的影响。一般要求有低CAD。</li>
+<li>Efficacy-specificity AUC(AUC)：这是对ASR和CAD之间的trade-off的量化</li>
+<li>Neuron-separation ratio(NSR)：衡量良性样本和trigger input所激活的神经元的交集。</li>
+</ol>
+<h4 id="近来发展"><a href="#近来发展" class="headerlink" title="近来发展"></a>近来发展</h4><p>近来攻击方法大多依赖于patch-based trigger(出现了image blending等)。</p>
+<p>-&gt;改变trigger位置和模式，使其“动态”.</p>
+<p>reference: Ahmed Salem, Rui Wen, Michael Backes, Shiqing Ma, and Yang Zhang. Dynamic backdoor attacks against machine learning models. </p>
+<p>-&gt;Liu等人（2020）提出将后门触发器伪装为反射率，使有毒图像看起来很自然。</p>
+<p><img src="https://p3.ssl.qhimg.com/t01757dc71923afcb3f.png" alt="reflect"></p>
+<p>上图是一个简单的图示。a是三种反射类型的物理模型，b上半部分是训练阶段，可以看到其也是通过数据投毒实现的，不同的是投毒的数据是通过将良性图像与反射影像结合得到的，并且没有修改标签。在推理时，只需要同样在input上叠加trigger（这里是反射影像）即可激活后门。</p>
+<p>reference: Yunfei Liu, Xingjun Ma, James Bailey, and Feng Lu. Reflflection backdoor: A natural backdoor attack on deep neural networks. 2020.</p>
+<h3 id="防御模式"><a href="#防御模式" class="headerlink" title="防御模式"></a>防御模式</h3><h5 id="training-defense"><a href="#training-defense" class="headerlink" title="training defense"></a>training defense</h5><p>训练防御假设防御者能够控制训练过程，而对手则通过提供受感染的训练数据来进行攻击</p>
+<p>然而，这一假设与我们的威胁模型并不匹配，其中已经训练过的后门模型是由第三方提供的</p>
+<h5 id="model-defense"><a href="#model-defense" class="headerlink" title="model defense"></a>model defense</h5><p>部署在核实model。</p>
+<p>e.g. </p>
+<ul>
+<li><p>Fine-Pruning </p>
+<p>假设是一个被嵌入后门的模型中，有一些神经元专门负责后门的激活，而一些神经元专门负责正常样本的激活。首先输入一大堆良性样本，pruning那些在处理良性样本输入时处于休眠状态的神经元，接着进行fine-tuning（微调），这一部分将会使用一部分良性样本对模型进行微调。两种措施结合起来彻底消除神经网络中的后门。</p>
+<p>reference: Kang Liu, Brendan Dolan-Gavitt, and Siddharth Garg. Fine-Pruning: Defending Against Backdooring Attacks on Deep Neural Networks. </p>
+</li>
+<li><p>神经清洗 Neural cleanse</p>
+<p>第一个可以探测backdoor model的方法</p>
+<p>基于假设：一些后门方法通常用一些patch作为后门trigger，而这些trigger又会指向一个类别</p>
+<p>​                 带有后门的模型所对应的触发器，要比利用正常模型生成的‘触发器’要小得多</p>
+<p>后门攻击的关键点是 在一个被感染的模型中，相比于将样本分类为其他没受感染的标签，将样本分类为目标标签所需要的扰动更小（改变了模型的决策边界）。如果将分类问题看作是在多维空间中创建分区，每个维度捕获一些特征，那么被植入后门的模型相当于在其他标签与目标标签的区域中创建了捷径。</p>
+<p><img src="https://p4.ssl.qhimg.com/t01b7dc7c127116ae0d.png" alt="juece"></p>
+<p>后门检测过程：</p>
+<ol>
+<li><p>对于每一个给定的标签，将其视为后门攻击的潜在标签，设计一个最优化的方案，以找到最小的触发器，将其他标签的样本错误分类到该标签。</p>
+</li>
+<li><p>反复步骤1，得到每个标签对应的触发器。</p>
+</li>
+<li><p>测量每个触发器的大小。根据触发器替换的像素来判断是否为后门触发器。</p>
+<p>（逆向工程）</p>
+</li>
+</ol>
+<p>reference: Bolun Wang, Yuanshun Yao, Shawn Shan, Huiying Li, Bimal Viswanath, Haitao Zheng, and Ben Y Zhao. Neural cleanse: Identifying and mitigating backdoor attacks in neural networks.</p>
+</li>
+<li><p>strip</p>
+<p>基本假设：带有trigger的图片会比较稳定地产生同样的输出。</p>
+<p>把各种图片混合在一起输入，对其随机地添加噪声观察模型对预测类别的鲁棒性。</p>
+<p>基于trigger的假设，对于正常模型中扰乱后的预测值熵应该很低，而后门模型应该很高。借此得到的probability就是它认为是后门的概率。</p>
+<p>reference: Yansong Gao, Chang Xu, Derui Wang, Shiping Chen, Damith C.Ranasinghe, Surya Nepal: STRIP: a defence against trojan attacks on deep neural networks</p>
+</li>
+<li><p>GradCam</p>
+<p>基于假设：带有trigger的图片 神经网络会把注意力集中到trigger上，而不是这张图片本身值得注意的地方上。</p>
+<p>GradCam是一个神经网络的可视化工具。通过观察神经网络的梯度来算神经网络对图片的哪些部分更感兴趣。而基于假设，就可以通过判断机器的集中度来检测有没有被植入后门。</p>
+</li>
+</ul>
+<h5 id="testing-time-defense"><a href="#testing-time-defense" class="headerlink" title="testing-time defense"></a>testing-time defense</h5><p>testing-time defense在部署后的模型。它侧重于验证所提供的图像是否中毒，以及如何减轻它。</p>
+
+    </div>
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <div id="comment">
+        <div id="gitalk-container">
+        </div>
+    </div>
+    
+</div>
+                     
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 2022 - 2022 Serene
+            <span class="footer-icon">
+                <a-icon type="flag" theme="filled" /></span>
+            @Serene Sivy
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/korilin/hexo-theme-particle">Particle Theme</a></div>
+        
+    </div>
+
+</footer>
+
+<script src="/js/highlight.min.js"></script>
+<script src="/js/particle.js"></script>
+                </div>
+            </div>
+        </transition>
+    </div>
+
+    <script>
+    new Vue({
+        el: "#layout",
+        data: {
+            show_page: false,
+            onload_menu: false,
+            menu_show: false,
+            card_top: 100
+        },
+        created: function () {
+            var that = this
+            window.onload = function () {
+                that.show_page = true
+                document.getElementById("loadcontent").style.opacity = 0
+                setTimeout(function () {
+                    document.getElementById("loadleft").style.width = 0
+                    document.getElementById("loadright").style.width = 0
+                }, 300)
+                setTimeout(function () {
+                    document.getElementById("loading").style = "display:none"
+                }, 600)
+            }
+        },
+        mounted: function () {
+            var that = this
+            window.addEventListener('scroll', function (e) {
+                that.menu_show = false
+            })
+        },
+        methods: {
+            home_click: function () {
+                window.scrollTo({
+                    top: window.innerHeight - 80,
+                    behavior: "smooth",
+                });
+            }
+        }
+    })
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: 'serene-sivy',
+        clientSecret: '2594164433cjs',
+        repo: 'comments',      // The repository of store comments,
+        owner: 'serene-sivy',
+        admin: ['serene-sivy'],
+        language: 'en',
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: true  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+</body>
+
+</html>

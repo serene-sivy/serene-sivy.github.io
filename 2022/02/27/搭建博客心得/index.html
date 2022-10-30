@@ -1,0 +1,352 @@
+
+<!DOCTYPE html>
+<html lang="en ">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serene || 利用GitHub page 与 hexo 搭建博客教程及心得</title>
+    <meta name="author" content="Serene Sivy">
+    <meta name="description" content=" ">
+    <meta name="keywords" content=" ">
+    <link rel="icon" href="/https://pic2.zhimg.com/v2-ab977c62c1f645c4fc56020c9fb833fc_720w.jpg?source=d16d100b">
+    <link rel="stylesheet" href="/css/antd.min.css">
+    
+    <link rel="stylesheet" href="/css/full-theme.css">
+    
+    <script src="/js/vue.js"></script>
+    <script src="/js/antd.min.js"></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+
+    <div id="loading"
+        style="height: 100vh; width: 100%; position: fixed;display: flex;z-index: 200; justify-content: space-between;">
+        <div id="loadleft" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div id="loadright" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div
+            style="position: fixed; height: 100vh; width: 100%;display: flex;justify-content: center;align-items: center;">
+            <div id="loadcontent"
+                style="width:400px;height:400px;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px#a3ddfb; text-align:center;opacity:1;transition:opacity 0.3s ease-out;">
+                <div>
+                    <h2>LOADING...</h2>
+                    <p>加载过慢请开启缓存(浏览器默认开启)</p>
+                    <div>
+                        <img src="/dancingkitty.gif" alt="loading">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="layout">
+        <transition name="into">
+            <div v-show="show_page" style="display: none;">
+                <div id="menu_show">
+                     
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Serene</span>
+        </a>
+        
+        <a href="/">
+            <span>
+                <a-icon type="home" theme="filled" />
+            </span>
+            <span>home</span>
+        </a>
+        
+        <a href="/archives">
+            <span>
+                <a-icon type="folder" theme="filled" />
+            </span>
+            <span>archives</span>
+        </a>
+        
+        <a href="/categories">
+            <span>
+                <a-icon type="book" theme="filled" />
+            </span>
+            <span>categories</span>
+        </a>
+        
+        <a href="/tags">
+            <span>
+                <a-icon type="tags" theme="filled" />
+            </span>
+            <span>tags</span>
+        </a>
+        
+    </div>
+
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div :class="'title'" @click="menu_show=!menu_show">
+            <span style="margin-right: 10px;">
+                <a-icon type="appstore" theme="filled" />
+            </span>
+            <span>Serene</span>
+        </div>
+        <div class="items" v-show="menu_show">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="home" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">home</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="folder" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">archives</div>
+                </div>
+            </a>
+            
+            <a href="/categories">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="book" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">categories</div>
+                </div>
+            </a>
+            
+            <a href="/tags">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="tags" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        <div class="curtain" v-show="menu_show"></div>
+    </div>
+
+</nav>
+                </div>
+
+                <div id="main">
+                     
+<link rel="stylesheet" href="/css/post-body.css">
+<div class="article">
+    <div>
+        <h1>利用GitHub page 与 hexo 搭建博客教程及心得 </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/2/27
+        </span>
+
+        
+        <span class="category">
+            <a href="/categories/tuition">
+                <span class="icon">
+                    <a-icon type="book" theme="filled" />
+                </span>
+                tuition
+            </a>
+        </span>
+        
+
+        
+    </div>
+
+    <div class="content" v-pre>
+        <p>本文是第一篇技术教程方面的博客，是基于本人在参考无数链接，碰到的无数问题，搭建数天才完成的博客搭建来写的，以此总结搭建博客的具体思路。此处使用的方式是使用github提供的域名与hexo前端搭建工具共同完成的，也是相比之下最适合新手、最简单的方式。不过搭建思路与模板是已经确定好的，在此基础上还可以进一步扩展的有：自己租服务器和域名搭建博客（只需在github pages配置那里改成服务器配置即可），自己完成前端搭建（在模板进行改动或自己根据模板的文件结构完成自己手写的博客搭建）等。</p>
+<p>Outline:</p>
+<ul>
+<li>搭建教程</li>
+<li>可能遇到的问题及解决</li>
+<li>心得体会</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="搭建教程"><a href="#搭建教程" class="headerlink" title="搭建教程"></a>搭建教程</h2><p>因为本人不想花钱去租域名和服务器，故使用GitHub免费提供的服务器及域名，获取方式如下：</p>
+<ol>
+<li>创建GitHub账号</li>
+<li>创建新仓库（New repository）</li>
+<li>将仓库命名为  用户名.github.io  （类似于本站<a target="_blank" rel="noopener" href="https://serene-sivy.github.io,其中serene-sivy是我github的用户名)/">https://serene-sivy.github.io，其中serene-sivy是我GitHub的用户名）</a></li>
+<li>创建完毕，即得到你的GitHub page</li>
+</ol>
+<p>之后是博客搭建的具体过程。<br>首先搭配前端语言运行环境，即基于 Chrome V8 引擎的 Javascript 运行环境 node.js。（<a target="_blank" rel="noopener" href="https://www.php.cn/js-tutorial-483528.html#:~">下载地址及我所参考的安装教程</a>）在安装node.js之后会配套安装一个命令，即npm（Node Package Manager）。npm作为世界最大的软件包仓库，之后会用它安装hexo及其插件。</p>
+<pre><code>npm install moment
+</code></pre>
+<p>即从npm软件包仓库中下载moment这个包到本地。</p>
+<p>之后又要下载版本控制工具 Git，<a href="https://link.zhihu.com/?target=https://git-scm.com/download/win">下载地址</a>，主要用于与GitHub进行绑定。</p>
+<p>以上下载完毕之后在cmd中用如下命令检查是否安装成功：<br>    npm -v<br>    git –version</p>
+<p>在输入命令后回车若显示对应程序版本号，则安装成功；不然则安装失败。</p>
+<p>安装成功之后使用npm命令下载hexo包：</p>
+<pre><code>npm install hexo-cli -g
+</code></pre>
+<p>其中，-g是指全局，即下载后的hexo可被电脑全局使用，不然则只能在特定文件中使用。</p>
+<p>在安装过程中可能会出现的问题在下个部分具体阐述。</p>
+<p>接下来，对于npm的使用暂时告一段落，重点放在通过git实现与GitHub的远程连接与一些命令操作。</p>
+<p>首先，在桌面上右键，点击Git Bash here，如下图所示，之后输入命令</p>
+<p><img src="https://pic3.zhimg.com/80/v2-8b1cbe253d6e0301bd9a68c6f98a9f52_1440w.jpg" alt="桌面"></p>
+<pre><code>ssh-keygen -t rsa -C &quot;你的GitHub注册邮箱&quot;
+</code></pre>
+<p>输入后什么都不用管，累积敲三个回车，但要等待电脑每一步处理完后再敲。</p>
+<p>之后在打开文件夹c盘，并打开用户（有些电脑文件名为users）文件，之后进入用户，就可以找到名为“.ssh”的文件，打开它并找到文件名为“id_rsa.pub”的文件（注意，不是id_rsa文件），打开它并全选复制里面的内容（笔者所用打开方式为notepad，右键后点击edit with notepad++），而这里面就是git为本机用户配备的ssh密钥。</p>
+<p>之后登陆自己GitHub账号，点击右上角头像后点击settings，后找到keys，新建new SSH key。title可以随意，将复制内容原封不动地粘贴到下面的key那一栏，最后点击Add SSH key。</p>
+<p>在Git Bash中检测GitHub公钥设置是否成功，输入 ssh <a href="mailto:&#103;&#105;&#116;&#x40;&#x67;&#x69;&#116;&#x68;&#117;&#98;&#46;&#99;&#111;&#x6d;">&#103;&#105;&#116;&#x40;&#x67;&#x69;&#116;&#x68;&#117;&#98;&#46;&#99;&#111;&#x6d;</a> ：</p>
+<p><img src="https://pic3.zhimg.com/80/v2-da481ffa686410becd4186c656b4ebd6_1440w.jpg" alt="sshkeys"></p>
+<p>如上则说明成功。</p>
+<p>其中，保存到GitHub里的是公钥，而用户对应的有一个私钥，当你向GitHub上推送内容时为了检验合法性，要将公钥与私钥匹配验证是否配对。只有合法时才允许推送。至于推送，后面会用到。</p>
+<p>之后开始正式搭建博客。</p>
+<p>在某个位置新建一个文件夹用来盛放自己的博客。比如，我新建了一个blog文件夹，之后打开那个空文件夹，之后鼠标右键后点击Git Bash Here，进入命令行，输入</p>
+<pre><code>hexo init
+</code></pre>
+<p>之后，在该文件的根目录下找到_config.yml文件，翻到最后，在deployer那里修改为：</p>
+<pre><code>deploy:
+type: git
+repository: https://github.com/serene-sivy/serene-sivy.github.io.git （这里每个人不一样，在自己GitHub里找到.git.io的仓库，并将该仓库网址复制到这里；或直接根据本文中所示格式输入，将serene-sivy替换为你的GitHub ID）
+branch: main
+</code></pre>
+<p>注意：‘:’ 与后面内容要隔开一个空格的距离。</p>
+<p>之后，我们博客的雏形就已建好。以下介绍一下git bash中hexo的常用命令：</p>
+<pre><code>npm install hexo -g #安装Hexo
+npm update hexo -g #升级
+hexo init #初始化博客
+hexo n &quot;我的博客&quot; == hexo new &quot;我的博客&quot; #新建文章
+hexo g == hexo generate #生成
+hexo s == hexo server #启动服务预览
+hexo d == hexo deploy #部署
+hexo clean #清除缓存，若是网页正常情况下可以忽略这条命令
+</code></pre>
+<p>往往一般连到一起用到的三连指令是“hexo g”（生成）  “hexo s”（查看）  “hexo d”（部署到GitHub page）</p>
+<p>在使用“hexo d”之前，先要执行指令安装自动部署发布工具 “npm install hexo-deployer-git –save”</p>
+<p>在第一次hexo d时，还要用token登录GitHub。而token就去GitHub_settings_developing settings_personal access tokens，点击generate new token，之后将生成的token复制记录好，因为在创建关闭这个网页后，这个token就再也不能看了，如果再需要，只能重新生成。登录之后，便可成功部署。这样，第一个博客就已搭建好了。</p>
+<p>如果需要主题的话，可以去hexo_themes中选择，使用git clone下载，并自行在_config.yml中更改相关配置（提示：一定要首行对齐，不然会报错）。</p>
+<p>以上，便是利用GitHub和hexo创建个人博客的全教程了。</p>
+<h2 id="所遇到的问题及解决"><a href="#所遇到的问题及解决" class="headerlink" title="所遇到的问题及解决"></a>所遇到的问题及解决</h2><p><strong>git使用前莫忘配置自己身份信息。</strong></p>
+<p>在进入git后首先在命令行里输入命令：</p>
+<pre><code>$ git config --global user.name &quot;你的GitHub用户名&quot;
+$ git config --global user.email &quot;你的GitHub注册邮箱&quot;
+</code></pre>
+<p><strong>npm下载网络不佳且不稳定。</strong></p>
+<p>可使用国内cnpm淘宝镜像。即将连通到国外的网络转换到国内的网，这样可以更快更稳定。安装可使用如下命令：</p>
+<pre><code>npm install -g cnpm --registry=https://registry.npm.taobao.org
+</code></pre>
+<p>此项操作并不必要，具体可自行参考网上教程。</p>
+<p><strong>在cmd或git命令行中使用npm指令下载时报错，如出现“permission denied”或“operation not permitted.”等关键词</strong></p>
+<p>我曾被这个问题困扰了足足两天，才最终在查阅大量教程和室友帮助下解决。</p>
+<p>这涉及操作系统权限问题。对于我的电脑而言，使用npm install指令需要管理员权限，而直接打开git bash无权限使用该命令，故系统报错。弄清原因后，我又疑惑在blog文件夹内如何用管理员身份打开git bash。</p>
+<p>解决：在window开始栏中右键，点击“以管理员身份运行”打开git bash，之后在DOS中输入cd跳转到blog所在文件夹（git命令与cmd命令大同小异，可以学习一下），即可实现以管理员身份在blog文件夹内git bash。之后再使用npm install命令即可成功运行。</p>
+<p><strong>明明已经安装过了hexo-cli -g，在自己的blog文件夹中输入hexo init 后显示“Cannot find module ‘hexo’ from ‘文件位置’ ”</strong></p>
+<p>解决方案1：重新安装hexo-cli -g</p>
+<pre><code>$ npm uninstall hexo-cli -g
+$ npm install hexo-cli -g
+</code></pre>
+<p>解决方案2：以管理员身份打开，输入</p>
+<pre><code>$ npm install
+$ npm install hexo-cli -g
+</code></pre>
+<p>之后便可以正常使用hexo。我在使用解决方案一时安装过程中也总是出问题。</p>
+<p>我查看了诸多教程后中找到了这一解决方案，在其他方法都失败了的情况下这一解决方案恰好可以解决我所面对的这一问题，虽然具体原理我仍不太清楚。</p>
+<p><strong>deploy或连接时出现 fatal: Unable to access ……  Failed to connect……的报错</strong></p>
+<p>网络问题，多试几遍。</p>
+<h2 id="心得体会"><a href="#心得体会" class="headerlink" title="心得体会"></a>心得体会</h2><p>搭建博客的过程对于我来说真的是一场无比艰难与漫长的过程。虽然一开始满怀兴趣与憧憬，但慢慢就被各种各样的error，各种各样的报错折磨地失去耐心。其实在经历过后，也可以看到，正是这样不断地遇到问题、遇到阻碍，才使我不得不去不断地探究原因、解决问题，这一过程使我一步步趋向于一些本质性的、原理性的探索，才能让我更明白每一步操作的目的与原理。不过在当时，当遇到自己完全解决不了的问题的时候，当看了并实践了那么多的解决方案之后还是解决不了这个问题的时候，当自己出现的问题别人甚至都没有出现过的时候，我真的想过放弃，或许以自己的能力还远远达不到建立一个个人博客的要求。</p>
+<p>可是，最终这个博客还是出现在了你们面前，尽管还是如此简陋。而这，要归功于对于自己的相信，归功于熄而复燃的渴望与热情，归功于不急不躁、四处寻找解决方案的耐心（这几天绝对是我用搜索引擎最频繁的一段时间），更要归功于那些同样出现问题，不断解决并将方法与解决方案共享出来的人。或许，能够同样帮助到那些正遇到无法解决的问题的人，也是我建立这个博客的初衷之一吧。</p>
+
+    </div>
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <div id="comment">
+        <div id="gitalk-container">
+        </div>
+    </div>
+    
+</div>
+                     
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 2022 - 2022 Serene
+            <span class="footer-icon">
+                <a-icon type="flag" theme="filled" /></span>
+            @Serene Sivy
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/korilin/hexo-theme-particle">Particle Theme</a></div>
+        
+    </div>
+
+</footer>
+
+<script src="/js/highlight.min.js"></script>
+<script src="/js/particle.js"></script>
+                </div>
+            </div>
+        </transition>
+    </div>
+
+    <script>
+    new Vue({
+        el: "#layout",
+        data: {
+            show_page: false,
+            onload_menu: false,
+            menu_show: false,
+            card_top: 100
+        },
+        created: function () {
+            var that = this
+            window.onload = function () {
+                that.show_page = true
+                document.getElementById("loadcontent").style.opacity = 0
+                setTimeout(function () {
+                    document.getElementById("loadleft").style.width = 0
+                    document.getElementById("loadright").style.width = 0
+                }, 300)
+                setTimeout(function () {
+                    document.getElementById("loading").style = "display:none"
+                }, 600)
+            }
+        },
+        mounted: function () {
+            var that = this
+            window.addEventListener('scroll', function (e) {
+                that.menu_show = false
+            })
+        },
+        methods: {
+            home_click: function () {
+                window.scrollTo({
+                    top: window.innerHeight - 80,
+                    behavior: "smooth",
+                });
+            }
+        }
+    })
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: 'serene-sivy',
+        clientSecret: '2594164433cjs',
+        repo: 'comments',      // The repository of store comments,
+        owner: 'serene-sivy',
+        admin: ['serene-sivy'],
+        language: 'en',
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: true  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+</body>
+
+</html>

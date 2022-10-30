@@ -1,0 +1,420 @@
+
+<!DOCTYPE html>
+<html lang="en ">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serene || 简单的智能小车开发</title>
+    <meta name="author" content="Serene Sivy">
+    <meta name="description" content=" ">
+    <meta name="keywords" content=" ">
+    <link rel="icon" href="/https://pic2.zhimg.com/v2-ab977c62c1f645c4fc56020c9fb833fc_720w.jpg?source=d16d100b">
+    <link rel="stylesheet" href="/css/antd.min.css">
+    
+    <link rel="stylesheet" href="/css/full-theme.css">
+    
+    <script src="/js/vue.js"></script>
+    <script src="/js/antd.min.js"></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+
+    <div id="loading"
+        style="height: 100vh; width: 100%; position: fixed;display: flex;z-index: 200; justify-content: space-between;">
+        <div id="loadleft" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div id="loadright" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div
+            style="position: fixed; height: 100vh; width: 100%;display: flex;justify-content: center;align-items: center;">
+            <div id="loadcontent"
+                style="width:400px;height:400px;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px#a3ddfb; text-align:center;opacity:1;transition:opacity 0.3s ease-out;">
+                <div>
+                    <h2>LOADING...</h2>
+                    <p>加载过慢请开启缓存(浏览器默认开启)</p>
+                    <div>
+                        <img src="/dancingkitty.gif" alt="loading">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="layout">
+        <transition name="into">
+            <div v-show="show_page" style="display: none;">
+                <div id="menu_show">
+                     
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Serene</span>
+        </a>
+        
+        <a href="/">
+            <span>
+                <a-icon type="home" theme="filled" />
+            </span>
+            <span>home</span>
+        </a>
+        
+        <a href="/archives">
+            <span>
+                <a-icon type="folder" theme="filled" />
+            </span>
+            <span>archives</span>
+        </a>
+        
+        <a href="/categories">
+            <span>
+                <a-icon type="book" theme="filled" />
+            </span>
+            <span>categories</span>
+        </a>
+        
+        <a href="/tags">
+            <span>
+                <a-icon type="tags" theme="filled" />
+            </span>
+            <span>tags</span>
+        </a>
+        
+    </div>
+
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div :class="'title'" @click="menu_show=!menu_show">
+            <span style="margin-right: 10px;">
+                <a-icon type="appstore" theme="filled" />
+            </span>
+            <span>Serene</span>
+        </div>
+        <div class="items" v-show="menu_show">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="home" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">home</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="folder" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">archives</div>
+                </div>
+            </a>
+            
+            <a href="/categories">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="book" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">categories</div>
+                </div>
+            </a>
+            
+            <a href="/tags">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="tags" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        <div class="curtain" v-show="menu_show"></div>
+    </div>
+
+</nav>
+                </div>
+
+                <div id="main">
+                     
+<link rel="stylesheet" href="/css/post-body.css">
+<div class="article">
+    <div>
+        <h1>简单的智能小车开发 </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/3/12
+        </span>
+
+        
+        <span class="category">
+            <a href="/categories/project">
+                <span class="icon">
+                    <a-icon type="book" theme="filled" />
+                </span>
+                project
+            </a>
+        </span>
+        
+
+        
+
+        <span class="tags">
+            <span class="icon">
+                <a-icon type="tags" theme="filled" />
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/嵌入式" style=color:#03a9f4>
+                    嵌入式
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+
+    <div class="content" v-pre>
+        <h3 id="嵌入式开发的初尝试"><a href="#嵌入式开发的初尝试" class="headerlink" title="嵌入式开发的初尝试"></a>嵌入式开发的初尝试</h3><p>因为上的一门课，我初次接触到了嵌入式开发的一些知识和原理，并进行了十分粗浅的尝试。本次尝试是基于arduino的智能小车进行，并通过c语言对其进行开发。</p>
+<p>大体思路概括：首先围绕一块arduino的主板进行硬件的组装，包括电机、舵机、红外寻迹模块、超声波测距等。小车组装完毕后，在计算机上使用arduino IDE编写代码，并可以把代码传到智能小车上，智能小车就可以按照程序运行。</p>
+<p>（其中使用arduino来编程，是因为其具有如下好处：与arduino板匹配度高，可直接传递代码；与其他电子开发平台相比，程序代码简单明了，虽然也是用的c语法，但其具有强大的库文件，使得代码无比简单明了；arduino是一个开源平台，有着丰富的代码库）</p>
+<p>本文从三个部分进行介绍智能小车开发的全过程：</p>
+<ul>
+<li>硬件组装</li>
+<li>软件开发</li>
+<li>最终运行</li>
+</ul>
+<span id="more"></span>
+
+<h3 id="硬件组装"><a href="#硬件组装" class="headerlink" title="硬件组装"></a>硬件组装</h3><p>这一部分介绍简略些，依次组装直流电机组、电池、定向轮、电压检测模块、arduino主板、接线板与车轮、超声波舵机云台，具体安装过程略去。</p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/bHcEKH"><img src="https://s1.ax1x.com/2022/03/12/bHcEKH.jpg" alt="bHcEKH.jpg"></a></p>
+<p>安装完毕后，进行硬件的调试，首先是调试红外避障模块。原理是：智能小车上电后，红外对管就开始工作，当红外对管前方一定距离内有障碍物出现时，会 把发射管发射的红外光反射回来，此时被接收管接收到，通过电压比较芯片分析后输出相应的信号，当红 外对管前方一定距离内有障碍物出现时状态指示 LED 灯亮起，电位器用于调节检测障碍物的距离。调试过程略去。</p>
+<p>然后调节红外寻迹板块。工作原理：利用判断黑白线来完成寻迹，红外光有一个反射特性。但对于不同的 物体反射特性是不同，特别是对白色反光的物体，红外光的反射量将会多一点。 而对黑色不反光的物体，红外反射量将会大量的减少。那么我们就可利用这个特性来完成黑与白的判断。</p>
+<p>下图为红外寻迹模块</p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/bHcrM4"><img src="https://s1.ax1x.com/2022/03/12/bHcrM4.png" alt="bHcrM4.png"></a></p>
+<p>接下来调节电机模块。调节完毕之后完成接线，之后小车就已大功告成。</p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/bHcqot"><img src="https://s1.ax1x.com/2022/03/12/bHcqot.png" alt="bHcqot.png"></a></p>
+<h3 id="软件开发"><a href="#软件开发" class="headerlink" title="软件开发"></a>软件开发</h3><p>硬件配置好后，进行软件编程。arduino配备了齐全且完备的函数，可以直接调用来实现一些简单的操作。在编程时，可使用一个图形化编程工具作为辅助——Mixly，如果已经基本了解arduino的基本函数也可以直接使用arduino编写程序。</p>
+<blockquote>
+<p>Mixly（米思齐）是在北京师范大学傅骞博士团队组织开发的一款国内自主研发，且免费开源的图形化编程工具。在这里mixly可以直接为我们提供现成的操作函数，并以图形的形式展现、调用。其中包含逻辑（如循环、选择等结构）、数组、函数等等c语言的语法结构，个人认为十分适合编程入门。<br>题外话：这也是我第一次接触图形化编程。一接触就被它的简单、便捷、明了的特点所折服。它是如此友好，用图形拼插的方式展现出各功能的作用和逻辑关系。想起一位学长创业的项目就是编程拼图，就是用如此友好、通俗的方式将编程学习普及，特别是向小孩子普及，激发他们的学习兴趣。现在年营业额已超千万，而那位学长才大四。那位学长的一场分享也让我印象深刻：“做一点心潮澎湃的事情”</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/bHgPwn"><img src="https://s1.ax1x.com/2022/03/12/bHgPwn.png" alt="bHgPwn.png"></a></p>
+<p>以让小车前进为例。</p>
+<p>mixly中，只需直接调用左右电机的函数（即拖拽对应的图形），便可实现。</p>
+<p>而用arduino编程，代码如下：</p>
+<pre><code>int left_motor_en = 5;//左电机使能 
+int right_motor_en = 6;//右电机使能 
+int left_motor_go = 3;//左电机正传 
+int right_motor_go = 4;//右电机正传 
+int left_motor_back = 2;//左电机反转 
+int right_motor_back = 7;//右电机反转 
+void setup() 
+&#123;
+//电机驱动引脚全部设置为输出模式 
+pinMode(left_motor_en,OUTPUT); 
+pinMode(right_motor_en,OUTPUT); 
+pinMode(left_motor_go,OUTPUT);
+pinMode(right_motor_go,OUTPUT); 
+pinMode(left_motor_back,OUTPUT); 
+pinMode(right_motor_back,OUTPUT); 
+analogWrite(left_motor_en,255);//左电机占空比值 取值范围 0-255，255 最快 
+analogWrite(right_motor_en,255);//右电机占空比值取值范围 0-255 ,255 最快 
+&#125;
+//小车前进 
+void forward() 
+&#123;
+     digitalWrite(left_motor_go,HIGH); //左电机前进 
+     digitalWrite(left_motor_back,LOW); 
+     digitalWrite(right_motor_go,HIGH); //右电机前进 
+     digitalWrite(right_motor_back,LOW); 
+&#125;
+void loop() 
+&#123;
+ forward();//小车前进 
+ &#125;
+</code></pre>
+<p>而如果代码实现左转右转，以左转为例，就让左电机不动，右电机转或左电机转的比右电机慢即可。</p>
+<p>也可以用代码实现一些比较有意思的功能，比如：</p>
+<h4 id="小车跟随——即小车会跟着你走"><a href="#小车跟随——即小车会跟着你走" class="headerlink" title="小车跟随——即小车会跟着你走"></a>小车跟随——即小车会跟着你走</h4><p>mixly：即为上图</p>
+<p>代码：</p>
+<pre><code>#include &quot;yunk_ARCar.h&quot;
+Yunk_ARCar_IRAvoid  yk_arIRAvoid(12, 13);
+Yunk_ARCar_Motor  yk_arCar(3, 2, 4, 7, 5, 6);
+
+void setup()    //可理解为初始化
+&#123;
+
+&#125;
+
+void loop()
+&#123;
+
+    if (LOW == yk_arIRAvoid.Senser_State_L() &amp;&amp; LOW == yk_arIRAvoid.Senser_State_L()) 
+&#123;
+    yk_arCar.Run(120, 0);
+&#125; 
+else &#123;
+if (HIGH == yk_arIRAvoid.Senser_State_L() &amp;&amp; LOW == yk_arIRAvoid.Senser_State_R()) 
+&#123;
+  yk_arCar.Right(120, 0);
+&#125;
+if (LOW == yk_arIRAvoid.Senser_State_L() &amp;&amp; HIGH == yk_arIRAvoid.Senser_State_R()) 
+&#123;
+  yk_arCar.Left(120, 0);
+&#125;
+if (HIGH == yk_arIRAvoid.Senser_State_L() &amp;&amp; HIGH == yk_arIRAvoid.Senser_State_R())
+&#123;
+  yk_arCar.Stop(120, 0);
+&#125;
+&#125;
+&#125;
+</code></pre>
+<h4 id="智能避障"><a href="#智能避障" class="headerlink" title="智能避障"></a>智能避障</h4><p>代码实现：</p>
+<pre><code>#include &quot;yunk_ARCar.h&quot;
+volatile int LeftDirection;
+volatile int RightDirection;
+Yunk_ARCar_CloudServo yk_arcloudservo_9(9, OUTPUT);
+Yunk_ARCar_Motor  yk_arCar(3, 2, 4, 7, 5, 6);
+
+float checkdistance_A5_A4() &#123;
+digitalWrite(A5, LOW);
+delayMicroseconds(2);
+digitalWrite(A5, HIGH);
+delayMicroseconds(10);
+digitalWrite(A5, LOW);
+float distance = pulseIn(A4, HIGH) / 58.00;
+delay(10);
+return distance;
+&#125;
+void setup()
+&#123;
+LeftDirection = 0;
+RightDirection = 0;
+pinMode(A5, OUTPUT);
+pinMode(A4, INPUT);
+&#125;
+void loop()
+&#123;
+yk_arcloudservo_9.CloudServo_Contrl(90,65);
+if (checkdistance_A5_A4() &lt; 45) &#123;
+yk_arCar.Stop(130, 100);
+yk_arCar.Back(130, 300);
+yk_arCar.Stop(130, 100);
+yk_arcloudservo_9.CloudServo_Contrl(180,65);
+LeftDirection = checkdistance_A5_A4();
+yk_arcloudservo_9.CloudServo_Contrl(0,65);
+RightDirection = checkdistance_A5_A4();
+if (LeftDirection &lt; 45 &amp;&amp; RightDirection &lt; 45) &#123;
+  yk_arCar.SpinLeft(130, 600);
+&#125; 
+else &#123;
+  if (LeftDirection &gt; RightDirection) &#123;
+    yk_arCar.Left(130, 500);
+    yk_arCar.Stop(130, 100);
+  &#125; else &#123;
+    yk_arCar.Right(130, 500);
+    yk_arCar.Stop(130, 100);
+  &#125;
+&#125;
+&#125; else &#123;
+yk_arCar.Run(130, 0);
+&#125;
+&#125;
+</code></pre>
+<h3 id="最终运行"><a href="#最终运行" class="headerlink" title="最终运行"></a>最终运行</h3><p>代码完成后，在arduino或mixly里将代码编译完成，再通过USB数据线将代码传入arduino主板，打开开关小车就可以按照所编写的程序运行了。</p>
+<p>一点总结：之前的编程都是在计算机环境中，接收到的输出也都是计算机内部通过计算、运行反馈到屏幕上的结果。而这次经历也让我对于嵌入式的开发有所了解。其本质也是用c语言，通过调用函数来控制特定电子元件，并通过改变参数实现操作。这样的开发感觉是一种在计算机的虚拟世界和实体的世界建立一种联系。实体的设备使得计算机上的代码焕发了生命，而代码又使得设备更加灵活、智能，是一种双向赋能。</p>
+
+    </div>
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <div id="comment">
+        <div id="gitalk-container">
+        </div>
+    </div>
+    
+</div>
+                     
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 2022 - 2022 Serene
+            <span class="footer-icon">
+                <a-icon type="flag" theme="filled" /></span>
+            @Serene Sivy
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/korilin/hexo-theme-particle">Particle Theme</a></div>
+        
+    </div>
+
+</footer>
+
+<script src="/js/highlight.min.js"></script>
+<script src="/js/particle.js"></script>
+                </div>
+            </div>
+        </transition>
+    </div>
+
+    <script>
+    new Vue({
+        el: "#layout",
+        data: {
+            show_page: false,
+            onload_menu: false,
+            menu_show: false,
+            card_top: 100
+        },
+        created: function () {
+            var that = this
+            window.onload = function () {
+                that.show_page = true
+                document.getElementById("loadcontent").style.opacity = 0
+                setTimeout(function () {
+                    document.getElementById("loadleft").style.width = 0
+                    document.getElementById("loadright").style.width = 0
+                }, 300)
+                setTimeout(function () {
+                    document.getElementById("loading").style = "display:none"
+                }, 600)
+            }
+        },
+        mounted: function () {
+            var that = this
+            window.addEventListener('scroll', function (e) {
+                that.menu_show = false
+            })
+        },
+        methods: {
+            home_click: function () {
+                window.scrollTo({
+                    top: window.innerHeight - 80,
+                    behavior: "smooth",
+                });
+            }
+        }
+    })
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: 'serene-sivy',
+        clientSecret: '2594164433cjs',
+        repo: 'comments',      // The repository of store comments,
+        owner: 'serene-sivy',
+        admin: ['serene-sivy'],
+        language: 'en',
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: true  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+</body>
+
+</html>
