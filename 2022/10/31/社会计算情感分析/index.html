@@ -267,7 +267,6 @@ def cut_words(pos_comments, neg_comments, pos_words, neg_words):
     pos_words = purify(pos_words)
     neg_words = purify(neg_words)
 
-    # 以下这些再就不需要再运行了 已经写好了.csv
     with open(&quot;positive_words.csv&quot;, &#39;w&#39;, encoding=&quot;UTF-8&quot;, newline=&#39;&#39;) as f1:
         writer = csv.writer(f1)
         writer.writerow(pos_words)
@@ -393,7 +392,7 @@ pos.to_excel(&quot;most_positive_words.xlsx&quot;)
 neg.to_excel(&quot;most_negative_words.xlsx&quot;)
 </code></pre>
 <h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p><a target="_blank" rel="noopener" href="https://imgse.com/i/xoiwzd"><img src="https://s1.ax1x.com/2022/10/30/xoiwzd.png" alt="xoiwzd.png"></a></p>
-<p>使用sort()函数进行排序后发现仍有无法，猜测可能是因为Python排序精度的问题？</p>
+<p>使用sort()函数进行排序后发现有些误差，猜测可能是因为Python的sort函数排序精度的问题？</p>
 <p>最终得到结果：</p>
 <table>
 <thead>
@@ -943,7 +942,7 @@ neg.to_excel(&quot;most_negative_words.xlsx&quot;)
     const gitalk = new Gitalk({
         clientID: 'serene-sivy',
         clientSecret: '2594164433cjs',
-        repo: 'comments',      // The repository of store comments,
+        repo: 'https://github.com/serene-sivy/comments.git',      // The repository of store comments,
         owner: 'serene-sivy',
         admin: ['serene-sivy'],
         language: 'en',
