@@ -1,0 +1,310 @@
+
+<!DOCTYPE html>
+<html lang="en ">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serene || Watermark in Neural Network</title>
+    <meta name="author" content="Serene Sivy">
+    <meta name="description" content=" ">
+    <meta name="keywords" content=" ">
+    <link rel="icon" href="/https://pic2.zhimg.com/v2-ab977c62c1f645c4fc56020c9fb833fc_720w.jpg?source=d16d100b">
+    <link rel="stylesheet" href="/css/antd.min.css">
+    
+    <link rel="stylesheet" href="/css/full-theme.css">
+    
+    <script src="/js/vue.js"></script>
+    <script src="/js/antd.min.js"></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+
+    <div id="loading"
+        style="height: 100vh; width: 100%; position: fixed;display: flex;z-index: 200; justify-content: space-between;">
+        <div id="loadleft" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div id="loadright" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div
+            style="position: fixed; height: 100vh; width: 100%;display: flex;justify-content: center;align-items: center;">
+            <div id="loadcontent"
+                style="width:400px;height:400px;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px#a3ddfb; text-align:center;opacity:1;transition:opacity 0.3s ease-out;">
+                <div>
+                    <h2>LOADING...</h2>
+                    <p>加载过慢请开启缓存(浏览器默认开启)</p>
+                    <div>
+                        <img src="/dancingkitty.gif" alt="loading">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="layout">
+        <transition name="into">
+            <div v-show="show_page" style="display: none;">
+                <div id="menu_show">
+                     
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Serene</span>
+        </a>
+        
+        <a href="/">
+            <span>
+                <a-icon type="home" theme="filled" />
+            </span>
+            <span>home</span>
+        </a>
+        
+        <a href="/archives">
+            <span>
+                <a-icon type="folder" theme="filled" />
+            </span>
+            <span>archives</span>
+        </a>
+        
+        <a href="/categories">
+            <span>
+                <a-icon type="book" theme="filled" />
+            </span>
+            <span>categories</span>
+        </a>
+        
+        <a href="/tags">
+            <span>
+                <a-icon type="tags" theme="filled" />
+            </span>
+            <span>tags</span>
+        </a>
+        
+    </div>
+
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div :class="'title'" @click="menu_show=!menu_show">
+            <span style="margin-right: 10px;">
+                <a-icon type="appstore" theme="filled" />
+            </span>
+            <span>Serene</span>
+        </div>
+        <div class="items" v-show="menu_show">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="home" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">home</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="folder" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">archives</div>
+                </div>
+            </a>
+            
+            <a href="/categories">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="book" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">categories</div>
+                </div>
+            </a>
+            
+            <a href="/tags">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="tags" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        <div class="curtain" v-show="menu_show"></div>
+    </div>
+
+</nav>
+                </div>
+
+                <div id="main">
+                     
+<link rel="stylesheet" href="/css/post-body.css">
+<div class="article">
+    <div>
+        <h1>Watermark in Neural Network </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2022/11/9
+        </span>
+
+        
+        <span class="category">
+            <a href="/categories/research">
+                <span class="icon">
+                    <a-icon type="book" theme="filled" />
+                </span>
+                research
+            </a>
+        </span>
+        
+
+        
+
+        <span class="tags">
+            <span class="icon">
+                <a-icon type="tags" theme="filled" />
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/AI-security" style=color:#ff7d73>
+                    AI security
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+
+    <div class="content" v-pre>
+        <p>作为一个最近逐渐被重视且发展趋势较好的领域，神经网络中的水印相关的研究正在蓬勃发展，这也得益于对于神经网络模型作为一种智力成果和知识产权的重视。同时，这个领域在一些方面与后门有着相通之处，可以在某种角度说成是 后门攻击的正向应用，故有着很好的发展前景。</p>
+<h3 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h3><p>神经网络模型的知识产权保护</p>
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>数字水印是一种将特定信息（又称水印）隐藏在数字信号中、不影响信号使用价值的技术。若要拷贝载有水印的信号，则水印也会一并被拷贝。如果水印包含了信号拥有者和来源等信息，一旦信号被泄露，通过在泄露的信号中重构水印，可确定信号的版权。</p>
+<span id="more"></span>
+
+<h3 id="评价指标"><a href="#评价指标" class="headerlink" title="评价指标"></a>评价指标</h3><ul>
+<li>首先要确保水印嵌入不会严重损害神经网络在特定任务上的性能，即任务保真度高。</li>
+</ul>
+<p>借鉴多媒体水印技术的评价指标，神经网络模型水印还需要考虑：</p>
+<ul>
+<li>水印嵌入量</li>
+<li>水印保真度</li>
+<li>水印唯一性（不能从未添加水印的任意神经网络模型中重构出水印）</li>
+<li>计算复杂度（嵌入&#x2F;提取水印的运算量）</li>
+<li>安全性（攻击者重建水印的难度）</li>
+<li>鲁棒性（抵抗水印攻击的能力）</li>
+<li>普适性</li>
+</ul>
+<h3 id="现有方法"><a href="#现有方法" class="headerlink" title="现有方法"></a>现有方法</h3><h4 id="主流"><a href="#主流" class="headerlink" title="主流"></a>主流</h4><p>主流方法多针对卷积神经网络，其原因在于卷积神经网络的应用更为广泛和成功，且一些适用于卷积神经网络的模型水印技术能够扩展到其他网络。</p>
+<p>从神经网络的任务看，主流方法多面向分类模型和生成模型，前者预测样本的类别，后者依据学习到的知识，生成新的样本。</p>
+<h4 id="添加水印-方法"><a href="#添加水印-方法" class="headerlink" title="添加水印 方法"></a>添加水印 方法</h4><p>（黑盒、白盒假设较强，剽窃者通过严格限制模型使用权限，可轻易使“白盒”水印和“黑盒”水印失效，无法提取。）</p>
+<h5 id="构造特殊的输入样本（输入层）–也有-基于触发集的黑盒水印-之称"><a href="#构造特殊的输入样本（输入层）–也有-基于触发集的黑盒水印-之称" class="headerlink" title="构造特殊的输入样本（输入层）–也有 基于触发集的黑盒水印 之称"></a>构造特殊的输入样本（输入层）–也有 基于触发集的黑盒水印 之称</h5><p>利用神经网络在特殊样本集上的预期输出承载水印。（目前比较局限于分类问题）</p>
+<p>e.g.  Jialong Zhang, Zhongshu Gu, Jiyong Jang, Hui Wu,Marc Ph. Stoecklin, Heqing Huang, Ian Molloy. Protecting intellectual propertyof deep neural networks with watermarking. <em><a href="https://link.zhihu.com/?target=http://Proc.Asia">http://Proc.Asia</a> Conference on Computer and Communications Security</em>, pp. 159-172, 2018.</p>
+<p>对输入添加特定的模式，并通过更改标签，使神经网络学习到特定的模式，建立起特定的模式与更改后的标签之间的对应关系，水印检测时，依据目标神经网络在添加有特定模式的样本集上的输出结果来确定产权，相关工作还包括标签扩容[3]、对抗样本[4]等。</p>
+<p>[3] Qi Zhang, Leo Yu Zhang, Jun Zhang, Longxiang Gao,Yong Xiang. Protecting IP of deep neural networks with watermarking: a newlabel helps. <em>Proc. Pacific-AsiaConference on Knowledge Discovery and Data Mining</em>, pp. 462-474, 2020.</p>
+<p>[4] Erwan Le Merrer, Patrick Pérez, Gilles Trédan. Adversarialfrontier stitching for remote neural network watermarking. <em>Neural Computing and Applications</em>, vol. 32, no. 13, pp. 9233-9244,2020.</p>
+<h5 id="调整神经网络的结构或参数（中间层）–基于权重的白盒水印"><a href="#调整神经网络的结构或参数（中间层）–基于权重的白盒水印" class="headerlink" title="调整神经网络的结构或参数（中间层）–基于权重的白盒水印"></a>调整神经网络的结构或参数（中间层）–基于权重的白盒水印</h5><p>通过修改神经网络的结构或参数来承载水印。</p>
+<p>e.g. Yusuke Uchida, Yuki Nagai, Shigeyuki Sakazawa,Shin’ichi Satoh. Embedding watermarks into deep neural networks. <em>Proc. ACM on International Conference onMultimedia Retrieval</em>, pp. 269-277, 2017.</p>
+<p>通过添加关联水印的正则化项使神经网络在训练的过程中将水印自动嵌入在模型的参数当中，在此基础上，文献[5]提出利用额外的神经网络改进水印嵌入和提取的性能。相关工作还包括抖动调制[6]、植入指纹[7]、补偿机制[8]和添加特殊层[9]等。</p>
+<h5 id="标记神经网络的输出结果（输出层）–无盒"><a href="#标记神经网络的输出结果（输出层）–无盒" class="headerlink" title="标记神经网络的输出结果（输出层）–无盒"></a>标记神经网络的输出结果（输出层）–无盒</h5><p>通过调制神经网络的输出结果，达到承载水印的目的。</p>
+<p>对神经网络的输出图像添加水印，能够在输出图像中检测水印以鉴定产权。</p>
+<h4 id="水印提取-方法"><a href="#水印提取-方法" class="headerlink" title="水印提取 方法"></a>水印提取 方法</h4><p>许多修改网络参数的方法可归类为白盒水印，基于后门或对抗样本的方法多属于黑盒水印，通过对神经网络的输出添加水印则可以实现无盒认证。</p>
+<h5 id="白盒"><a href="#白盒" class="headerlink" title="白盒"></a>白盒</h5><p>白盒水印是指提取者能够访问目标网络的内部结构和参数，并能与之交互（输入&#x2F;输出查询）</p>
+<h5 id="黑盒"><a href="#黑盒" class="headerlink" title="黑盒"></a>黑盒</h5><p>黑盒水印是指提取者不能掌握目标网络的全部细节，但能与之交互</p>
+<h5 id="无盒"><a href="#无盒" class="headerlink" title="无盒"></a>无盒</h5><p>无盒水印是指提取者既不能完全掌握目标网络的细节，也不能与之交互，但能够通过其他手段收集到由目标网络制造的数据。</p>
+<h4 id="水印攻击-方法"><a href="#水印攻击-方法" class="headerlink" title="水印攻击 方法"></a>水印攻击 方法</h4><h5 id="“攻击嵌入”"><a href="#“攻击嵌入”" class="headerlink" title="“攻击嵌入”"></a>“攻击嵌入”</h5><p>目的是去除已嵌入的水印，典型的攻击手段包括模型重训练、模型微调、模型压缩和剪枝等。</p>
+<h5 id="“攻击提取”"><a href="#“攻击提取”" class="headerlink" title="“攻击提取”"></a>“攻击提取”</h5><p>目的是让水印难以重构，例如，通过对输入样本或输出结果进行干扰（如篡改输入样本、伪造输出结果等），可以使水印检测失败。</p>
+<h5 id="“提升自身实力，与之共存”"><a href="#“提升自身实力，与之共存”" class="headerlink" title="“提升自身实力，与之共存”"></a>“提升自身实力，与之共存”</h5><p>目的是植入或伪造对攻击者有利的新水印，造成产权鉴定出现歧义。</p>
+
+    </div>
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <div id="comment">
+        <div id="gitalk-container">
+        </div>
+    </div>
+    
+</div>
+                     
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 2022 - 2022 Serene
+            <span class="footer-icon">
+                <a-icon type="flag" theme="filled" /></span>
+            @Serene Sivy
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/korilin/hexo-theme-particle">Particle Theme</a></div>
+        
+    </div>
+
+</footer>
+
+<script src="/js/highlight.min.js"></script>
+<script src="/js/particle.js"></script>
+                </div>
+            </div>
+        </transition>
+    </div>
+
+    <script>
+    new Vue({
+        el: "#layout",
+        data: {
+            show_page: false,
+            onload_menu: false,
+            menu_show: false,
+            card_top: 100
+        },
+        created: function () {
+            var that = this
+            window.onload = function () {
+                that.show_page = true
+                document.getElementById("loadcontent").style.opacity = 0
+                setTimeout(function () {
+                    document.getElementById("loadleft").style.width = 0
+                    document.getElementById("loadright").style.width = 0
+                }, 300)
+                setTimeout(function () {
+                    document.getElementById("loading").style = "display:none"
+                }, 600)
+            }
+        },
+        mounted: function () {
+            var that = this
+            window.addEventListener('scroll', function (e) {
+                that.menu_show = false
+            })
+        },
+        methods: {
+            home_click: function () {
+                window.scrollTo({
+                    top: window.innerHeight - 80,
+                    behavior: "smooth",
+                });
+            }
+        }
+    })
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: '6088615a5353374105fe',
+        clientSecret: 'b07b42fe968c9ae9fc72a5fed73de37cc3022640',
+        repo: 'comments',      // The repository of store comments,
+        owner: 'serene-sivy',
+        admin: ['serene-sivy'],
+        language: 'en',
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: true  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
+</script>
+
+</body>
+
+</html>

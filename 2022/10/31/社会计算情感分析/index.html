@@ -167,7 +167,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/project" style=color:#00bcd4>
+                <a href="/tags/project" style=color:#ffa2c4>
                     project
                 </a>
             </span>
@@ -312,13 +312,18 @@ zh_dict = hownet_dict.get_zh_words()
 
         word = words[i]
         num_polar = 0
+        num_polar_0 = 0
+        num_polar_1 = 0
         if word not in zh_dict:
             words[i] = (word, num_polar)
             continue
         for p in pos_seedset:
-            num_polar += hownet_dict.calculate_word_similarity(word, p)
+            num_polar_0 += hownet_dict.calculate_word_similarity(word, p)
+        num_polar_0 = num_polar_0 / len(pos_seedset)   # 得正向的平均值
         for q in neg_seedset:
-            num_polar -= hownet_dict.calculate_word_similarity(word, q)
+            num_polar_1 -= hownet_dict.calculate_word_similarity(word, q)
+        num_polar_1 = num_polar_1 / len(neg_seedset)   # 得负向的平均值
+        num_polar = num_polar_0 + num_polar_1
         words[i] = (word, num_polar)
 </code></pre>
 <h5 id="snownlp实现"><a href="#snownlp实现" class="headerlink" title="snownlp实现"></a>snownlp实现</h5><p>此处用到自然语言处理工具snownlp，优点是功能较多且轻便好用。</p>
