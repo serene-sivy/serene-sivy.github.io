@@ -962,6 +962,30 @@ transition: opacity 1.0s;
   object-fit: contain;
 }
 
+.aha-bibtex-section {
+  padding-top: 3rem;
+}
+
+.aha-bibtex {
+  overflow-x: auto;
+  margin: 0;
+  padding: 1.25rem;
+  border: 1px solid #dfe8f3;
+  border-radius: 8px;
+  background: #fff;
+  color: #24364a;
+  box-shadow: 0 10px 28px rgba(16, 24, 40, 0.07);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  white-space: pre;
+}
+
+.aha-bibtex code {
+  color: inherit;
+  background: transparent;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
 .aha-metrics,
 .aha-result-grid {
   display: grid;
