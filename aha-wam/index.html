@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="AHA-WAM: Asynchronous Horizon-Adaptive World-Action Modeling with Observation-Guided Context Routing">
+  <meta name="keywords" content="AHA-WAM, World-Action Model, Robot Learning, Embodied Manipulation, RoboTwin">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AHA-WAM: Asynchronous Horizon-Adaptive World-Action Modeling</title>
+  <link rel="icon" type="image/png" href="./static/images/aha-logo.png">
+  <link rel="apple-touch-icon" href="./static/images/aha-logo.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css?v=7">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js?v=5"></script>
+</head>
+
+<body>
+  <section class="hero hero-banner aha-hero is-fullheight">
+    <div class="hero-video">
+      <video playsinline autoplay muted loop poster="./static/images/aha/teaser.png">
+        <source src="https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/title.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="aha-hero-shade"></div>
+
+    <div class="hero-head">
+      <header class="navbar aha-navbar">
+        <div class="container">
+          <div class="navbar-brand">
+            <a class="navbar-item aha-brand" href="#">AHA-WAM</a>
+          </div>
+          <div class="navbar-menu is-active">
+            <div class="navbar-end">
+              <a class="navbar-item" href="#abstract">Abstract</a>
+              <a class="navbar-item" href="#overview">Overview</a>
+              <a class="navbar-item" href="#method">Method</a>
+              <a class="navbar-item" href="#experiments">Results</a>
+              <a class="navbar-item" href="#real">Real Robot</a>
+              <a class="navbar-item" href="#videos">Demos</a>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title publication-title aha-title"><span class="aha-title-blue">AHA-</span><span class="aha-title-green">WAM</span></h1>
+        <h2 class="subtitle publication-title aha-subtitle">
+          Asynchronous Horizon-Adaptive World-Action Modeling with Observation-Guided Context Routing
+        </h2>
+
+        <div class="publication-authors aha-authors">
+          <span>Jisong Cai<sup>1,2*</sup></span>
+          <span>Long Ling<sup>1,3*</sup></span>
+          <span>Shiwei Chu<sup>1</sup></span>
+          <span>Zhongshan Liu<sup>3</sup></span>
+          <span>Jiayue Kang<sup>1</sup></span>
+          <span>Zhixuan Liang<sup>4,2</sup></span>
+          <span>Wenjie Xu<sup>3</sup></span>
+          <span>Yinan Mao<sup>3</sup></span>
+          <span>Weinan Zhang<sup>1,2</sup></span>
+          <span>Xiaokang Yang<sup>1</sup></span>
+          <span>Ru Ying<sup>3</sup></span>
+          <span>Ran Zheng<sup>3</sup></span>
+          <span>Yao Mu<sup>1,2†</sup></span>
+        </div>
+
+        <div class="aha-hero-affiliations" aria-label="Affiliations">
+          <span><sup>1</sup>Shanghai Jiao Tong University</span>
+          <span><sup>2</sup>Shanghai AI Laboratory</span>
+          <span><sup>3</sup>Baidu AI Cloud</span>
+          <span><sup>4</sup>The University of Hong Kong</span>
+        </div>
+
+        <div class="publication-links aha-links">
+          <a href="./static/aha-wam.pdf" class="external-link button is-normal is-rounded is-dark">
+            <span class="icon"><img src="./static/images/pdf.svg" alt="PDF"></span>
+            <span>Paper</span>
+          </a>
+          <a href="https://arxiv.org/abs/2606.09811" class="external-link button is-normal is-rounded is-dark">
+            <span class="icon"><img src="./static/images/arxiv.svg" alt="arXiv"></span>
+            <span>arXiv</span>
+          </a>
+          <a href="https://huggingface.co/papers/2606.09811" class="external-link button is-normal is-rounded is-dark">
+            <span class="icon"><img src="./static/images/huggingface.svg" alt="Hugging Face"></span>
+            <span>Hugging Face</span>
+          </a>
+          <a href="#" class="external-link button is-normal is-rounded is-dark" aria-disabled="true">
+            <span class="icon"><img src="./static/images/github.svg" alt="GitHub"></span>
+            <span>Code</span>
+            <span class="aha-soon">Coming soon</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-foot is-hidden-mobile">
+      <nav class="tabs is-boxed is-fullwidth is-size-5">
+        <ul>
+          <li><a href="#abstract">Abstract</a></li>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#method">Method</a></li>
+          <li><a href="#experiments">Results</a></li>
+          <li><a href="#real">Real Robot</a></li>
+          <li><a href="#videos">Demos</a></li>
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  <section class="section aha-affiliation-section">
+    <div class="container is-max-widescreen">
+      <div class="aha-logo-strip" aria-label="Affiliation logos">
+        <div class="aha-logo-item"><sup>1</sup><img class="aha-logo-sjtu" src="./static/images/logo/sjtu_logo.png" alt="Shanghai Jiao Tong University"></div>
+        <div class="aha-logo-item"><sup>2</sup><img class="aha-logo-shlab" src="./static/images/logo/shanghaiAILab.png" alt="Shanghai AI Laboratory"></div>
+        <div class="aha-logo-item"><sup>3</sup><img class="aha-logo-baidu" src="./static/images/logo/baidu_logo.png" alt="Baidu AI Cloud"></div>
+        <div class="aha-logo-item"><sup>4</sup><img class="aha-logo-hku" src="./static/images/logo/hku_logo.png" alt="The University of Hong Kong"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section aha-band" id="abstract">
+    <div class="container is-max-widescreen">
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <div class="aha-section-heading">
+            <p class="aha-kicker">Abstract</p>
+            <h2 class="title is-2">Asynchronous Horizon-Adaptive World-Action Modeling</h2>
+          </div>
+          <p class="content aha-abstract">
+            World-action models inject physical priors into robot policies by learning visual scene
+            dynamics together with actions. Existing formulations, however, bind world prediction and
+            action execution to the same short temporal rhythm. AHA-WAM reorganizes this interface
+            around temporal asymmetry: a low-frequency video DiT acts as a long-horizon world planner
+            with rolling K/V memory, while a high-frequency action DiT executes short closed-loop action
+            chunks by querying reusable layerwise planner context. Horizon-adaptive offset training makes
+            the executor robust to planner-executor phase shifts, and Observation-Guided Video-Context
+            Routing adapts cached planner context to the latest visual observation without rerunning the
+            video DiT. Across RoboTwin 2.0 and real robots, AHA-WAM reaches 92.80% average RoboTwin
+            success, 78.33% original-setting real-world success, and 24.17Hz closed-loop control; the
+            distilled AHA-WAM-Flash variant further reaches 56.95Hz.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="overview">
+    <div class="container is-max-widescreen">
+      <div class="aha-section-heading">
+        <p class="aha-kicker">Introduction</p>
+        <h2 class="title is-2">Overview</h2>
+        <p>
+          AHA-WAM separates what should be slow from what must be fast. The video branch forms a
+          reusable long-horizon latent world plan; the action branch repeatedly adapts that plan to the
+          current observation and produces executable action chunks in a high-frequency control loop.
+        </p>
+      </div>
+
+      <div class="aha-video-frame aha-overview-video">
+        <video controls preload="metadata" playsinline>
+          <source src="https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/paper-introduction.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <figure class="aha-figure">
+        <img src="./static/images/aha/teaser.png" alt="AHA-WAM overview with RoboTwin, real-world and latency results">
+      </figure>
+
+      <div class="aha-metrics">
+        <div class="aha-metric is-robotwin">
+          <span>RoboTwin 2.0</span>
+          <strong>92.80%</strong>
+          <p>Average success across 50 dual-arm tasks, without robot-data pretraining.</p>
+        </div>
+        <div class="aha-metric is-real">
+          <span>Real-World Tasks</span>
+          <strong>78.33%</strong>
+          <p>Original-setting success across four physical bimanual tasks.</p>
+        </div>
+        <div class="aha-metric is-frequency">
+          <span>AHA-WAM-Flash</span>
+          <strong>56.95Hz</strong>
+          <p>ODE-distilled closed-loop frequency with a 10.82x speedup over Fast-WAM.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section aha-band" id="method">
+    <div class="container is-max-widescreen">
+      <div class="aha-section-heading">
+        <p class="aha-kicker">Method</p>
+        <h2 class="title is-2">Asynchronous Horizon-Adaptive World-Action Modeling</h2>
+        <p>
+          AHA-WAM reorganizes world-action modeling around temporal asymmetry. The method first
+          separates long-horizon world planning from high-frequency action execution, then keeps the
+          reused planner context aligned with the latest observation and stable across asynchronous
+          planner-executor phases.
+        </p>
+      </div>
+
+      <figure class="aha-figure aha-method-overview">
+        <img src="./static/images/aha/model_arch.png" alt="AHA-WAM dual-DiT architecture and attention mask">
+        <figcaption>The full AHA-WAM pipeline: slow video-DiT world planning, observation-guided context routing, and fast action-DiT execution.</figcaption>
+      </figure>
+
+      <div class="aha-method-pair">
+        <div class="aha-method-section">
+          <p class="aha-kicker">Planner-Executor Architecture</p>
+          <h3>Slow world planning, fast closed-loop execution.</h3>
+          <p>
+            AHA-WAM keeps a dual-DiT world-action model but assigns each branch a different temporal
+            role. The video DiT predicts long-horizon visual latents and exposes layerwise planner
+            context; the action DiT receives proprioception directly and consumes routed planner context
+            through layerwise joint attention to denoise short executable chunks.
+          </p>
+        </div>
+        <div class="aha-method-section">
+          <p class="aha-kicker">Layerwise Coupling</p>
+          <h3>Planner context is reused without decoding future frames.</h3>
+          <p>
+            One video-DiT refresh exposes latent K/V context that can be amortized over multiple
+            action-DiT updates. The action branch therefore benefits from learned visual dynamics while
+            avoiding expensive future-frame rollout in the per-update control loop.
+          </p>
+        </div>
+      </div>
+
+      <div class="aha-method-section">
+        <p class="aha-kicker">Observation-Guided Video-Context Routing</p>
+        <h3>Cached planner context is adapted before every action chunk.</h3>
+        <p>
+          Asynchronous execution reuses one planner context across multiple action updates, which can
+          make the context stale. OVCR builds compact routing queries from the latest visual observation,
+          reads the planner K/V context, and applies gated residual updates so each action chunk sees a
+          planner representation aligned with current visual evidence.
+        </p>
+      </div>
+
+      <div class="aha-method-section aha-offset">
+        <img src="./static/images/aha/async_offset.png" alt="Horizon-adaptive offset training timeline">
+        <div>
+          <p class="aha-kicker">Horizon-Adaptive Offset Training</p>
+          <h3>Training matches asynchronous deployment phases.</h3>
+          <p>
+            The action grid is randomly shifted inside the video horizon, teaching the executor to
+            consume planner context under the phase offsets created by asynchronous streaming.
+          </p>
+        </div>
+      </div>
+
+      <div class="aha-method-pair">
+        <div class="aha-method-section">
+          <p class="aha-kicker">Rolling Planner Memory</p>
+          <h3>The planner remembers past visual states.</h3>
+          <p>
+            The low-frequency video planner maintains a fixed-size FIFO rolling K/V memory over recent
+            planner refreshes. This extends the planner's temporal receptive field for long-horizon tasks
+            where completed subgoals or displaced objects may no longer be fully visible.
+          </p>
+        </div>
+        <div class="aha-method-section">
+          <p class="aha-kicker">Streaming Inference and Real-Time Optimization</p>
+          <h3>The video DiT leaves the per-update critical path.</h3>
+          <p>
+            At deployment, planner prefill and action execution run as non-blocking streams. TensorRT,
+            CUDA-graph capture, loop-invariant hoisting, and ODE distillation reduce action-update
+            latency while preserving the same planner-context and OVCR interface.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="experiments">
+    <div class="container is-max-widescreen">
+      <div class="aha-section-heading">
+        <p class="aha-kicker">Experiments</p>
+        <h2 class="title is-2">Simulation, Ablations, Real-World Deployment, and Frequency</h2>
+        <p>
+          The experiments are organized around five matched questions: simulation capability,
+          component mechanism, real-robot deployability, out-of-distribution robustness, and closed-loop
+          efficiency. The tabs keep these axes parallel with the paper's tables and figures.
+        </p>
+      </div>
+
+      <div class="aha-exp-panel">
+        <div class="aha-exp-tabs" role="tablist" aria-label="Experiment result views">
+          <button class="aha-exp-tab is-active" type="button" data-exp-view="robotwin">RoboTwin 2.0</button>
+          <button class="aha-exp-tab" type="button" data-exp-view="ablation">Ablations</button>
+          <button class="aha-exp-tab" type="button" data-exp-view="realworld">Real World</button>
+          <button class="aha-exp-tab" type="button" data-exp-view="latency">Frequency</button>
+        </div>
+
+        <div class="aha-exp-content">
+          <div class="aha-exp-copy">
+            <p class="aha-kicker" id="aha-exp-kicker">Table 1</p>
+            <h3 id="aha-exp-title">RoboTwin 2.0 Average Success on 50 Tasks</h3>
+            <p id="aha-exp-desc"></p>
+            <div class="aha-exp-stats" id="aha-exp-stats"></div>
+          </div>
+          <div class="aha-chart" id="aha-chart" aria-live="polite"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section aha-band" id="real">
+    <div class="container is-max-widescreen">
+      <div class="aha-section-heading">
+        <p class="aha-kicker">Real Robot</p>
+        <h2 class="title is-2">Four Bimanual Manipulation Tasks</h2>
+        <p>
+          AHA-WAM is deployed on two AgileX Piper arms using ego-view RGB observations. The four
+          tasks are intentionally complementary: rigid-object placement, deformable manipulation,
+          long-horizon multi-object organization, and fine-grained contact-rich tool use. Select a task
+          to compare original and generalization rollouts under the same model layout.
+        </p>
+      </div>
+
+      <div class="aha-task-tabs" role="tablist" aria-label="Real-world tasks">
+        <button class="aha-task-tab is-active" type="button" data-task="store">Store Plate</button>
+        <button class="aha-task-tab" type="button" data-task="fold">Fold Towel</button>
+        <button class="aha-task-tab" type="button" data-task="desktop">Organize Desktop</button>
+        <button class="aha-task-tab" type="button" data-task="soy">Prepare Soy Milk</button>
+      </div>
+
+      <div class="aha-task-summary" id="aha-task-summary"></div>
+
+      <div class="aha-real-panel">
+        <div class="aha-real-head">
+          <div>
+            <p class="aha-kicker" id="aha-real-kicker">Store Plate Rollouts</p>
+            <h3 id="aha-real-title">Original and Generalization Videos</h3>
+          </div>
+          <p id="aha-real-desc">Compare the same task across Motus, Fast-WAM, π0.5, and AHA-WAM.</p>
+        </div>
+        <div class="aha-real-videos" id="aha-real-videos"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="videos">
+    <div class="container is-max-widescreen">
+      <div class="aha-section-heading">
+        <p class="aha-kicker">Supplementary Videos</p>
+        <h2 class="title is-2">Runtime Comparisons and AHA-WAM Demos</h2>
+        <p>
+          Runtime clips isolate the effect of the asynchronous control loop, while the demo rollouts
+          collect representative AHA-WAM successes across original and shifted task settings.
+        </p>
+      </div>
+
+      <div class="aha-video-section">
+        <h3>Runtime and Control Smoothness</h3>
+        <p class="aha-video-note">Side-view runtime comparisons for Motus are paired with the available AHA-WAM rollout views.</p>
+        <div class="aha-video-grid is-runtime">
+          <article class="aha-video-card"><h5>Motus · No RTC / Interpolation</h5><video class="aha-lazy-video" controls preload="none" playsinline data-src="https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/runtime/store-plate/motus-no-rtc-interp-side.mp4"></video></article>
+          <article class="aha-video-card"><h5>Motus · With RTC + Action Interpolation</h5><video class="aha-lazy-video" controls preload="none" playsinline data-src="https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/runtime/store-plate/motus-with-rtc-interp-side.mp4"></video></article>
+          <article class="aha-video-card is-ours"><h5>AHA-WAM · No action interpolation</h5><video class="aha-lazy-video" controls preload="none" playsinline data-src="https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/runtime/store-plate/aha-wam-no-rtc-interp-side.mp4"></video></article>
+          <article class="aha-video-card is-ours"><h5>AHA-WAM · With action interpolation</h5><video class="aha-lazy-video" controls preload="none" playsinline data-src="https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/runtime/store-plate/aha-wam-with-rtc-interp-side.mp4"></video></article>
+        </div>
+      </div>
+
+      <div class="aha-video-section">
+        <h3>AHA-WAM Demo Rollouts</h3>
+        <div class="aha-video-grid is-demo">
+          <article class="aha-video-card is-ours"><h5>Prepare Soy Milk · Original</h5><video class="aha-lazy-video" controls preload="none" playsinline data-src="https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/demo/prepare-soy-milk-original.mp4"></video></article>
+          <article class="aha-video-card is-ours"><h5>Prepare Soy Milk · Background Shift</h5><video class="aha-lazy-video" controls preload="none" playsinline data-src="https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/demo/prepare-soy-milk-novel-environment.mp4"></video></article>
+          <article class="aha-video-card is-ours"><h5>Fold Cloth · Green Cloth</h5><video class="aha-lazy-video" controls preload="none" playsinline data-src="https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/demo/fold-towel-texture-green.mp4"></video></article>
+          <article class="aha-video-card is-ours"><h5>Fold Cloth · Yellow Cloth</h5><video class="aha-lazy-video" controls preload="none" playsinline data-src="https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/demo/fold-towel-texture-yellow.mp4"></video></article>
+          <article class="aha-video-card is-ours"><h5>Stack Plates · Original</h5><video class="aha-lazy-video" controls preload="none" playsinline data-src="https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/demo/store-plate-original.mp4"></video></article>
+          <article class="aha-video-card is-ours"><h5>Store Plate · Top Light</h5><video class="aha-lazy-video" controls preload="none" playsinline data-src="https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/demo/store-plate-top-light.mp4"></video></article>
+          <article class="aha-video-card is-ours"><h5>Store Plate · Side Light</h5><video class="aha-lazy-video" controls preload="none" playsinline data-src="https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/demo/store-plate-side-light.mp4"></video></article>
+          <article class="aha-video-card is-ours"><h5>Organize Desktop</h5><video class="aha-lazy-video" controls preload="none" playsinline data-src="https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/demo/organize-desktop-original.mp4"></video></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              <strong>AHA-WAM</strong>: Asynchronous Horizon-Adaptive World-Action Modeling with
+              Observation-Guided Context Routing.
+            </p>
+            <p>
+              Website template adapted from prior academic project pages including
+              <a href="https://nerfies.github.io/">NeRFies</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const experimentViews = {
+      robotwin: {
+        kicker: "Table 1",
+        title: "RoboTwin 2.0 Average Success on 50 Tasks",
+        desc: "AHA-WAM is trained without robot-data pretraining and evaluated under both clean and randomized RoboTwin 2.0 settings. The chart shows average task success.",
+        min: 60,
+        max: 100,
+        suffix: "%",
+        stats: [
+          ["Clean", "93.40%"],
+          ["Randomized", "92.20%"],
+          ["Average", "92.80%"]
+        ],
+        bars: [
+          ["π0", 62.16],
+          ["π0.5", 79.75],
+          ["ABot-M0", 80.80],
+          ["Motus from Wan2.2", 77.28],
+          ["Motus", 87.84],
+          ["Fast-WAM", 91.83],
+          ["LingBot-VA", 92.20],
+          ["AHA-WAM-Flash", 90.20],
+          ["AHA-WAM", 92.80, { highlight: true, badge: "♛" }]
+        ]
+      },
+      ablation: {
+        kicker: "Table 2",
+        title: "Asynchronous-Control Ablations",
+        desc: "Decoupling the streams alone is not enough. Rolling K/V memory preserves planner history, OVCR adapts reused context to the latest observation, and the full design recovers the performance gain.",
+        min: 87,
+        max: 93,
+        suffix: "%",
+        stats: [
+          ["Naive Async", "87.59%"],
+          ["+ K/V Memory", "89.99%"],
+          ["+ OVCR", "91.44%"],
+          ["Full AHA-WAM", "92.80%"]
+        ],
+        bars: [
+          ["Fast-WAM", 91.83],
+          ["Naive-Async", 87.59],
+          ["+ K/V Memory", 89.99],
+          ["+ OVCR", 91.44],
+          ["AHA-WAM", 92.80, { highlight: true, badge: "♛" }]
+        ]
+      },
+      realworld: {
+        kicker: "Figure 4",
+        title: "Real-World Success and Robustness",
+        desc: "Original settings measure deployment reliability; shifted settings measure robustness under unseen task variants. The paper reports both success rate and a 0-3 partial-progress score.",
+        min: 0,
+        max: 100,
+        suffix: "%",
+        stats: [
+          ["Original Success", "78.33%"],
+          ["Generalization Success", "53.33%"],
+          ["Generalization Score", "35.00"]
+        ],
+        bars: [
+          { group: "Original" },
+          ["Motus", 21.67],
+          ["Fast-WAM", 68.33],
+          ["π0.5", 76.67],
+          ["AHA-WAM", 78.33, { highlight: true, badge: "♛" }],
+          { group: "Generalization" },
+          ["Motus", 16.70],
+          ["Fast-WAM", 46.70],
+          ["AHA-WAM", 53.33, { highlight: true }],
+          ["π0.5", 55.00, { badge: "♛" }]
+        ]
+      },
+      latency: {
+        kicker: "Table 3",
+        title: "Frequency",
+        desc: "AHA-WAM removes the video DiT from the per-update critical path. TensorRT/CUDA-graph acceleration yields the 10-step path, and ODE distillation produces AHA-WAM-Flash.",
+        min: 0,
+        max: 60,
+        suffix: "Hz",
+        stats: [
+          ["AHA-WAM Latency", "41.37ms"],
+          ["AHA-WAM Frequency", "24.17Hz"],
+          ["AHA-WAM-Flash", "56.95Hz"],
+          ["Speedup vs Fast-WAM", "10.82x"]
+        ],
+        bars: [
+          ["Motus", 0.54],
+          ["Fast-WAM", 5.26],
+          ["AHA-WAM", 24.17, { highlight: true }],
+          ["AHA-WAM-Flash", 56.95, { highlight: true, badge: "⚡" }]
+        ]
+      }
+    };
+
+    const taskViews = {
+      store: {
+        title: "Store Plate",
+        challenge: "Spatial generalization and bimanual handover-placement.",
+        original: "93.3%",
+        shifted: "73.3%",
+        shiftName: "Lights Off / Side Light / Top Light"
+      },
+      fold: {
+        title: "Fold Towel",
+        challenge: "Deformable object manipulation with multi-step folding.",
+        original: "86.7%",
+        shifted: "53.3%",
+        shiftName: "Texture generalization"
+      },
+      desktop: {
+        title: "Organize Desktop",
+        challenge: "Long-horizon multi-object organization.",
+        original: "80.0%",
+        shifted: "46.7%",
+        shiftName: "Targets changed / Fewer targets / Distractors Added"
+      },
+      soy: {
+        title: "Prepare Soy Milk",
+        challenge: "Fine-grained contact-rich tool use.",
+        original: "53.3%",
+        shifted: "40.0%",
+        shiftName: "Novel environment"
+      }
+    };
+
+    const taskVideoViews = {
+      store: {
+        kicker: "Store Plate Rollouts",
+        title: "Original, Lights Off, Side Light, and Top Light",
+        desc: "Each row keeps the same model order so success and failure modes can be compared directly.",
+        sections: [
+          {
+            name: "Original",
+            scenarios: [
+              {
+                name: "Original setting",
+                models: {
+                  "Motus": [
+                    ["Success", "success", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/store-plate/original/motus-success.mp4"],
+                    ["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/store-plate/original/motus-failure.mp4"]
+                  ],
+                  "Fast-WAM": [
+                    ["Success", "success", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/store-plate/original/fast-wam-success.mp4"],
+                    ["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/store-plate/original/fast-wam-failure.mp4"]
+                  ],
+                  "π0.5": [
+                    ["Success", "success", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/store-plate/original/pi05-success.mp4"],
+                    ["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/store-plate/original/pi05-failure.mp4"]
+                  ],
+                  "AHA-WAM": [["Success", "ours", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/store-plate/original/aha-wam-success.mp4"]]
+                }
+              }
+            ]
+          },
+          {
+            name: "Generalization",
+            scenarios: [
+              {
+                name: "Top Light",
+                models: {
+                  "Motus": [["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/store-plate/top-light/motus-failure.mp4"]],
+                  "Fast-WAM": [["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/store-plate/top-light/fast-wam-failure.mp4"]],
+                  "π0.5": [["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/store-plate/top-light/pi05-failure.mp4"]],
+                  "AHA-WAM": [["Success", "ours", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/store-plate/top-light/aha-wam-success.mp4"]]
+                }
+              },
+              {
+                name: "Side Light",
+                models: {
+                  "Motus": [["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/store-plate/side-light/motus-failure.mp4"]],
+                  "Fast-WAM": [["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/store-plate/side-light/fast-wam-failure.mp4"]],
+                  "π0.5": [["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/store-plate/side-light/pi05-failure.mp4"]],
+                  "AHA-WAM": [["Success", "ours", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/store-plate/side-light/aha-wam-success.mp4"]]
+                }
+              },
+              {
+                name: "Lights Off",
+                models: {
+                  "Motus": [["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/store-plate/lights-off/motus-failure.mp4"]],
+                  "Fast-WAM": [["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/store-plate/lights-off/fast-wam-failure.mp4"]],
+                  "π0.5": [["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/store-plate/lights-off/pi05-failure.mp4"]],
+                  "AHA-WAM": [["Success", "ours", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/store-plate/lights-off/aha-wam-success.mp4"]]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      fold: {
+        kicker: "Fold Towel Rollouts",
+        title: "Original and Cloth-Color Generalization",
+        desc: "The same model columns make the deformable-object comparison consistent across settings.",
+        sections: [
+          {
+            name: "Original",
+            scenarios: [
+              {
+                name: "Original setting",
+                models: {
+                  "Motus": [
+                    ["Success", "success", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/fold-towel/original/motus-success.mp4"],
+                    ["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/fold-towel/original/motus-failure.mp4"]
+                  ],
+                  "Fast-WAM": [
+                    ["Success", "success", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/fold-towel/original/fast-wam-success.mp4"],
+                    ["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/fold-towel/original/fast-wam-failure.mp4"]
+                  ],
+                  "π0.5": [
+                    ["Success", "success", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/fold-towel/original/pi05-success.mp4"],
+                    ["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/fold-towel/original/pi05-failure.mp4"]
+                  ],
+                  "AHA-WAM": [["Success", "ours", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/fold-towel/original/aha-wam-success.mp4"]]
+                }
+              }
+            ]
+          },
+          {
+            name: "Generalization",
+            scenarios: [
+              {
+                name: "Green towel",
+                models: {
+                  "Motus": [["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/fold-towel/texture-generalization/motus-failure.mp4"]],
+                  "Fast-WAM": [["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/fold-towel/texture-generalization/fast-wam-failure.mp4"]],
+                  "π0.5": [["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/fold-towel/texture-generalization/pi05-failure.mp4"]],
+                  "AHA-WAM": [["Success", "ours", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/fold-towel/texture-generalization/aha-wam-success.mp4"]]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      desktop: {
+        kicker: "Organize Desktop Rollouts",
+        title: "Original and Layout Generalization",
+        desc: "Long-horizon object rearrangement is shown with aligned model columns for each environment shift.",
+        sections: [
+          {
+            name: "Original",
+            scenarios: [
+              {
+                name: "Original setting",
+                models: {
+                  "Motus": [
+                    ["Success", "success", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/organize-desktop/original/motus-success.mp4"],
+                    ["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/organize-desktop/original/motus-failure.mp4"]
+                  ],
+                  "Fast-WAM": [
+                    ["Success", "success", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/organize-desktop/original/fast-wam-success.mp4"],
+                    ["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/organize-desktop/original/fast-wam-failure.mp4"]
+                  ],
+                  "π0.5": [
+                    ["Success", "success", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/organize-desktop/original/pi05-success.mp4"],
+                    ["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/organize-desktop/original/pi05-failure.mp4"]
+                  ],
+                  "AHA-WAM": [["Success", "ours", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/organize-desktop/original/aha-wam-success.mp4"]]
+                }
+              }
+            ]
+          },
+          {
+            name: "Generalization",
+            scenarios: [
+              {
+                name: "Distractors Added",
+                models: {
+                  "Motus": [["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/organize-desktop/distractors-added/motus-failure.mp4"]],
+                  "Fast-WAM": [["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/organize-desktop/distractors-added/fast-wam-failure.mp4"]],
+                  "π0.5": [["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/organize-desktop/distractors-added/pi05-failure.mp4"]],
+                  "AHA-WAM": [["Success", "ours", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/organize-desktop/distractors-added/aha-wam-success.mp4"]]
+                }
+              },
+              {
+                name: "Fewer targets",
+                models: {
+                  "Motus": [["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/organize-desktop/fewer-targets/motus-failure.mp4"]],
+                  "Fast-WAM": [["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/organize-desktop/fewer-targets/fast-wam-failure.mp4"]],
+                  "π0.5": [["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/organize-desktop/fewer-targets/pi05-failure.mp4"]],
+                  "AHA-WAM": [["Success", "ours", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/organize-desktop/fewer-targets/aha-wam-success.mp4"]]
+                }
+              },
+              {
+                name: "Targets changed",
+                models: {
+                  "Motus": [["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/organize-desktop/targets-changed/motus-failure.mp4"]],
+                  "Fast-WAM": [["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/organize-desktop/targets-changed/fast-wam-failure.mp4"]],
+                  "π0.5": [["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/organize-desktop/targets-changed/pi05-failure.mp4"]],
+                  "AHA-WAM": [["Success", "ours", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/organize-desktop/targets-changed/aha-wam-success.mp4"]]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      soy: {
+        kicker: "Prepare Soy Milk Rollouts",
+        title: "Original and Novel Environment",
+        desc: "The powder-scooping task stresses fine-grained tool contact and visual background changes.",
+        sections: [
+          {
+            name: "Original",
+            scenarios: [
+              {
+                name: "Original setting",
+                models: {
+                  "Motus": [
+                    ["Success clip unavailable", "empty", ""],
+                    ["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/prepare-soy-milk/original/motus-failure.mp4"]
+                  ],
+                  "Fast-WAM": [
+                    ["Success", "success", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/prepare-soy-milk/original/fast-wam-success.mp4"],
+                    ["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/prepare-soy-milk/original/fast-wam-failure.mp4"]
+                  ],
+                  "π0.5": [
+                    ["Success", "success", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/prepare-soy-milk/original/pi05-success.mp4"],
+                    ["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/prepare-soy-milk/original/pi05-failure.mp4"]
+                  ],
+                  "AHA-WAM": [["Success", "ours", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/prepare-soy-milk/original/aha-wam-success.mp4"]]
+                }
+              }
+            ]
+          },
+          {
+            name: "Generalization",
+            scenarios: [
+              {
+                name: "Novel environment",
+                models: {
+                  "Motus": [["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/prepare-soy-milk/novel-environment/motus-failure.mp4"]],
+                  "Fast-WAM": [["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/prepare-soy-milk/novel-environment/fast-wam-failure.mp4"]],
+                  "π0.5": [["Failure", "failure", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/prepare-soy-milk/novel-environment/pi05-failure.mp4"]],
+                  "AHA-WAM": [["Success", "ours", "https://pub-9ec8114097194818be0f0d692726b5b3.r2.dev/static/videos/exp/real/prepare-soy-milk/novel-environment/aha-wam-success.mp4"]]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    };
+
+    function renderExperiment(viewName) {
+      const view = experimentViews[viewName];
+      document.getElementById("aha-exp-kicker").textContent = view.kicker;
+      document.getElementById("aha-exp-title").textContent = view.title;
+      document.getElementById("aha-exp-desc").textContent = view.desc;
+      document.getElementById("aha-exp-stats").innerHTML = view.stats
+        .map(([label, value]) => `<div><span>${label}</span><strong>${value}</strong></div>`)
+        .join("");
+
+      const chart = document.getElementById("aha-chart");
+      const min = view.min || 0;
+      chart.innerHTML = view.bars.map((item) => {
+        if (!Array.isArray(item)) {
+          return `<div class="aha-bar-group">${item.group}</div>`;
+        }
+        const [label, value, meta = {}] = item;
+        const highlight = typeof meta === "object" ? meta.highlight : meta;
+        const badge = typeof meta === "object" && meta.badge ? `<span class="aha-badge">${meta.badge}</span>` : "";
+        const width = Math.max(3, Math.min(100, (value - min) / (view.max - min) * 100));
+        const shown = Number.isInteger(value) ? value.toFixed(0) : value.toFixed(2).replace(/0$/, "").replace(/\\.0$/, "");
+        return `
+          <div class="aha-bar-row ${highlight ? "is-highlight" : ""}">
+            <div class="aha-bar-meta"><span>${label}${badge}</span><strong>${shown}${view.suffix}</strong></div>
+            <div class="aha-bar-track"><div class="aha-bar-fill" style="--target:${width}%"></div></div>
+          </div>`;
+      }).join("");
+      requestAnimationFrame(() => chart.classList.add("is-animated"));
+    }
+
+    function renderTask(taskName) {
+      const task = taskViews[taskName];
+      document.getElementById("aha-task-summary").innerHTML = `
+        <div>
+          <span>Selected Task</span>
+          <strong>${task.title}</strong>
+          <p>${task.challenge}</p>
+        </div>
+        <div>
+          <span>Original Success</span>
+          <strong>${task.original}</strong>
+          <p>AHA-WAM success under the original task setting.</p>
+        </div>
+        <div>
+          <span>${task.shiftName}</span>
+          <strong>${task.shifted}</strong>
+          <p>AHA-WAM success under the task-specific generalization shift.</p>
+        </div>`;
+      renderTaskVideos(taskName);
+    }
+
+    const activeRealScenarios = {};
+
+    function getTaskScenarios(task) {
+      return task.sections.flatMap((section) =>
+        section.scenarios.map((scenario) => ({
+          ...scenario,
+          sectionName: section.name
+        }))
+      );
+    }
+
+    function pickClipForScenario(taskName, scenario, model) {
+      const clips = scenario.models[model] || [];
+      if (scenario.sectionName === "Original") {
+        if (model === "AHA-WAM") {
+          return clips.find((clip) => clip[1] === "ours") || clips[0];
+        }
+        const successBaseline = taskName === "soy" ? "Fast-WAM" : "π0.5";
+        const wantedStatus = model === successBaseline ? "success" : "failure";
+        return clips.find((clip) => clip[1] === wantedStatus) || clips.find((clip) => clip[2]) || clips[0];
+      }
+      return clips.find((clip) => clip[2]) || clips[0];
+    }
+
+    function renderTaskVideos(taskName) {
+      const task = taskVideoViews[taskName];
+      const models = ["Motus", "Fast-WAM", "π0.5", "AHA-WAM"];
+      const scenarios = getTaskScenarios(task);
+      const activeIndex = activeRealScenarios[taskName] || 0;
+      const activeScenario = scenarios[activeIndex] || scenarios[0];
+      document.getElementById("aha-real-kicker").textContent = task.kicker;
+      document.getElementById("aha-real-title").textContent = task.title;
+      document.getElementById("aha-real-desc").textContent = task.desc;
+      const container = document.getElementById("aha-real-videos");
+      container.innerHTML = `
+        <div class="aha-scenario-tabs" role="tablist" aria-label="${task.title} scenarios">
+          ${scenarios.map((scenario, index) => `
+            <button class="aha-scenario-tab ${index === activeIndex ? "is-active" : ""}" type="button" data-scenario-index="${index}">
+              <span>${scenario.sectionName}</span>
+              <strong>${scenario.name}</strong>
+            </button>`).join("")}
+        </div>
+        <section class="aha-real-video-section">
+          <div class="aha-real-section-label">${activeScenario.sectionName}</div>
+          <div class="aha-real-scenario">
+            <h4>${activeScenario.name}</h4>
+            <div class="aha-model-grid">
+              ${models.map((model) => {
+                const [label, status, src] = pickClipForScenario(taskName, activeScenario, model) || ["Unavailable", "empty", ""];
+                const modelClass = model === "AHA-WAM" ? " is-ours" : "";
+                return `
+                  <article class="aha-model-column${modelClass}">
+                    <div class="aha-model-name">${model}</div>
+                    <div class="aha-model-clips">
+                      ${src ? `
+                        <div class="aha-video-card is-${status}">
+                          <h5>${label}</h5>
+                          <video class="aha-lazy-video" controls preload="none" playsinline data-src="${src}"></video>
+                        </div>` : `<div class="aha-video-placeholder">${label}</div>`}
+                    </div>
+                  </article>`;
+              }).join("")}
+            </div>
+          </div>
+        </section>`;
+
+      container.querySelectorAll(".aha-scenario-tab").forEach((button) => {
+        button.addEventListener("click", () => {
+          activeRealScenarios[taskName] = Number(button.dataset.scenarioIndex);
+          renderTaskVideos(taskName);
+        });
+      });
+      setupLazyVideos(container);
+    }
+
+    document.querySelectorAll(".aha-exp-tab").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".aha-exp-tab").forEach((b) => b.classList.remove("is-active"));
+        button.classList.add("is-active");
+        const chart = document.getElementById("aha-chart");
+        chart.classList.remove("is-animated");
+        renderExperiment(button.dataset.expView);
+      });
+    });
+
+    document.querySelectorAll(".aha-task-tab").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".aha-task-tab").forEach((b) => b.classList.remove("is-active"));
+        button.classList.add("is-active");
+        activeRealScenarios[button.dataset.task] = 0;
+        renderTask(button.dataset.task);
+      });
+    });
+
+    function loadLazyVideo(video) {
+      if (video.dataset.loaded === "true") {
+        return;
+      }
+      const src = video.dataset.src;
+      if (!src) {
+        return;
+      }
+      const source = document.createElement("source");
+      source.src = src;
+      source.type = "video/mp4";
+      video.appendChild(source);
+      video.dataset.loaded = "true";
+      video.load();
+    }
+
+    let videoObserver = null;
+    if ("IntersectionObserver" in window) {
+      videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            loadLazyVideo(entry.target);
+            videoObserver.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: "360px 0px" });
+    }
+
+    function setupLazyVideos(scope = document) {
+      const lazyVideos = Array.from(scope.querySelectorAll(".aha-lazy-video:not([data-observed='true'])"));
+      lazyVideos.forEach((video) => {
+        video.dataset.observed = "true";
+        if (videoObserver) {
+          videoObserver.observe(video);
+        }
+        video.addEventListener("pointerenter", () => loadLazyVideo(video), { once: true });
+        video.addEventListener("focus", () => loadLazyVideo(video), { once: true });
+        video.addEventListener("click", () => loadLazyVideo(video), { once: true });
+      });
+    }
+
+    setupLazyVideos();
+
+    renderExperiment("robotwin");
+    renderTask("store");
+  </script>
+</body>
+
+</html>
