@@ -717,6 +717,19 @@ transition: opacity 1.0s;
   margin-bottom: 1rem;
 }
 
+.aha-video-footnote {
+  max-width: 900px;
+  color: #7a8798;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  margin: -0.45rem 0 1rem;
+  padding: 0.55rem 0.75rem;
+  border-left: 3px solid #cfd8e3;
+  background: #f7f9fb;
+  border-radius: 0 6px 6px 0;
+  font-style: italic;
+}
+
 .aha-real-panel {
   margin-top: 1.7rem;
   overflow: hidden;
